@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Verification Form</title>
+    <link rel="stylesheet" href="/css/otpPage.css" />
+    
+</head>
+
+<body>
+    <div class="container">
+  
+        <h4>Enter OTP Code</h4>
+        <p>we will send an otp to given email</p>
+        <form action="/otpsignup" method="post">
+            <div class="input-field">
+                <input name="noOne" type="number" />
+                <input name="noTwo" type="number" disabled />
+                <input name="noThree" type="number" disabled/>
+                <input name="noFour" type="number" disabled />
+            </div>
+            <button type="submit">Verify OTP</button>
+        </form>
+    </div>
+    <script src="/js/otpPage.js" ></script>
+<%-include('../layouts/footer') -%>
