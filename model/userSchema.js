@@ -18,8 +18,13 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     isVerified:{
-        type:Boolean
+        type:Boolean,
+        default :false
+    },
+    isBlocked:{
+        type:Boolean,
+        default:false
     }
 }); 
 
-module.exports = mongoose.model("Userdetails",userSchema);
+module.exports = mongoose.model("userdetails",userSchema);

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RegistrationForm_v1 by Colorlib</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="fonts1/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="css1/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper" style="background-image: url('images1/bg-registration-form-1.jpg');">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="images1/registration-form-1.jpg" alt="">
+            </div>
+            <form action="/login" method="post" autocomplete="off" id="form" onsubmit="validateForm()">
+                <h3 class="register-head">login Form</h3>
+                <div class="form-wrapper">
+                    <% if(message=="Incorrect username or password"){%>
+                    <p class="messageP" style="color: red;">
+                        <%= message %>
+                    </p>
+                    <%}else if(message === "You were blocked by Admin"){%>
+                        <p class="messageP" style="color: red;">
+                           <%= message %>
+                        </p>
+                        <%}else{%>
+                            <p class="messageP" style="color: black;">
+                                <%= message %>
+                            </p>
+                            <%}%>
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" id="email" name="email" placeholder="enter email" class="form-control">
+                    <i class="zmdi zmdi-email"> </i>
+                </div>
+                <p id="emailError">invalid email</p>
+                <div class="form-wrapper">
+                    <div class="form-wrapper">
+                        <input type="password" id="password" name="password" placeholder=" enter password"
+                            class="form-control">
+                        <i class="zmdi zmdi-lock"></i>
+                    </div>
+                    <p id="passwordError">Password must be longer than 6 characters and contain a number</p>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="badge rounded-pill alert-dark" style=" height: 40px;">
+                            login
+                            <i class="zmdi zmdi-arrow-right arrowButton"></i>
+                        </button>
+                    </div>
+            </form>
+            <div class="pass-recover">
+                 <div class="row " >
+                  <p>forgot password?</p>
+                <a href="/emailVerify">resetpassword</a>
+            </div>
+              <div class="row">
+                <p>new customer?</p>
+                        <a style="list-style: none;" href="/signup">Signup</a>
+              </div>
+            </div>   
+        </div>
+    </div>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="js/userLoginValidation.js"></script>
+    <%-include('../layouts/footer') -%>

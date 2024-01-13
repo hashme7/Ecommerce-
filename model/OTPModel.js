@@ -11,12 +11,11 @@ const OTPschema  = new mongoose.Schema({
         required:true
     },
     createdAt:{
-        type:Date,
+        type:Date ,
+        expires: 60,
         default:Date.now,
-        expires: 60 * 1,
     },
-   
 })
+OTPschema.index({ createdAt: 1 }, { expireAfterSeconds: 60 });
 
-
-module.exports = mongoose.model("OTP",OTPschema);
+module.exports = mongoose.model("otps",OTPschema);

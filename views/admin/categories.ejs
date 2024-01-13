@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Nest Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/adminAssets/imgs/theme/favicon.svg" />
+    <!-- Template CSS -->
+    <link href="/adminAssets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/adminAssets/css/Editcategory.css">
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="#" class="logo">
+                <img src="/adminAssets\imgs\icons\logo-01.png" alt="IMG-LOGO">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"><i
+                        class="text-muted material-icons md-menu_open"></i></button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminDashboard">
+                        <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/Products">
+                        <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="page-orders-1.html">
+                        <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class=" menu-link" href="/admin/userslist">
+                        <i class="icon material-icons md-people"></i>
+                        <span class="text">users</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/categories">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Categories</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminBanners">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Banners</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminBanners">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminLogout">
+                        <span class="text">Logout</span>
+                    </a>
+                   
+                </li>
+            </ul>
+            <br />
+            <br />
+        </nav>
+    </aside>
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+                <form class="searchform">
+                    <div class="input-group">
+                        <input list="search_terms" type="text" class="form-control" placeholder="Search term" />
+                        <button class="btn btn-light bg" type="button"><i class="material-icons md-search"></i></button>
+                    </div>
+                    <datalist id="search_terms">
+                        <option value="Products"></option>
+                        <option value="New orders"></option>
+                        <option value="Apple iphone"></option>
+                        <option value="Ahmed Hassan"></option>
+                    </datalist>
+                </form>
+            </div>
+            <div class="col-nav">
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i
+                        class="material-icons md-apps"></i></button>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
+                                class="material-icons md-cast"></i></a>
+                    </li>
+                </ul>
+            </div>
+         
+        </header>
+        <div class="d-flex justify-content-center" style="padding-top: 0px;">
+            <h3 class="content-title" id="messageDiv" style="color: rgb(17, 97, 70);"></h3>
+        </div>
+        <section class="content-main" id="dynamicTable" style="padding-top: 0px;">
+            <div class="content-header">
+                <h2 class="content-title">category list</h2>
+                
+            </div>
+            <div class="card mb-4">
+                <header class="card-header">
+                    <div class="row gx-3">
+
+                        <div class="col-lg-4 col-md-6 me-auto" id="messageBox">
+                            <button class="add-button" onclick="formModal()"> Add Category</button>
+                        </div>
+
+                    </div>
+
+                </header>
+                <!-- card-header end// -->
+                <div class="card-body "  >
+                    <div class="table-responsive">
+                        <table class="table table-hover" >
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>category name</th>
+                                    <th>discription</th>
+                                    <th>Status</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i=0 ;i < categories.length ; i++ ) { %>
+                                    <tr>
+                                        <td>
+                                            <%= i+1 %>
+                                        </td>
+                                        <td id="categoryName">
+                                            <%= categories[i].CatName %>
+                                        </td>
+                                        <td>
+                                            <%= categories[i].discription %>
+                                        </td>
+                                        <td id="statusDiv">
+                                            <%= categories[i].isBlocked?"unlisted":"listed";%>
+                                        </td>
+                                        <td class="text-end">
+                                            <% if (categories[i].isBlocked){%>
+                                                <button class="badge rounded-pill badge-success" 
+                                                    onclick="blockAndUnblock('<%= categories[i].CatName %>','<%= categories[i].isBlocked%>',event)">
+                                                    Unblock
+                                                </button>
+                                                <% }else{%>
+                                                    <button class=" badge rounded-pill alert-warning" id="BlockBtn"
+                                                        onclick="blockAndUnblock('<%= categories[i].CatName %>','<%= categories[i].isBlocked%>',event)">
+                                                        Block
+                                                    </button>
+                                                    <%}%>
+                                                        <button class="badge rounded-pill alert-warning" 
+                                                            onclick="formModal('<%=categories[i]._id%>') ">
+                                                            Edit
+                                                        </button>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                            </tbody>
+                        </table> <!-- table-responsive.// -->
+                        <!-- firstModal --- Edit Category -->
+
+                    </div>
+                </div>
+                <!-- card-body end// -->
+
+            </div>
+
+
+        </section>
+        <div class="form-container" id="formContainer" >
+            <h2>Edit Category</h2>
+            <h3 id="messageBox"> </h3>
+            <form id="editCategoryForm">
+                <div class="form-group">
+                    <label for="CatName">Category Name:</label>
+                    <input type="text" id="CatName" name="CatName" oninput="debouncedValid(event, false)" required>
+                    <label for="CatName" id="messageCatName"></label>
+                    <p id="EerorMsCat"></p>
+                </div>
+                <div class="form-group">
+                    <label for="discription">Description:</label>
+                    <input type="text" id="discription" name="discription" value="PATCH" required>
+                    <p id="EerorMsDis"></p>
+                </div>
+            </form>
+            <button onclick="closeFormModel()">cancel</button>
+            <button id="formSubBtn" onclick="editFormsub()" >Update Category</button>
+        </div>
+        <!-- secondModal-- ADD category -->
+        <div class="form-container" id="addCategoryForm">
+            <h2>Add Category</h2>
+            <h4 id="addMessageBox"></h4>
+            <form id="editCategoryForm" >
+                <div class="form-group">
+                    <label for="CatName">Category Name:</label>
+                    <input type="text" id="AddCatName" name="CatName" oninput="debouncedValid(event, true)" >
+                    <p id="messageP"></p>
+                    <p id="erorMsCat"></p>
+                </div>
+                <div class="form-group">
+                    <label for="discription">Description:</label>
+                    <input type="text" id="Adddiscription" name="discription" >
+                    <p id="erorMsDis"></p>
+                </div>
+                <button onclick="closeAddModal()">cancel</button>
+                <button id="addCatBtn" onclick="addCategory(event)">Add Category</button>
+            </form>
+        </div>
+        <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">All rights reserved</div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="/adminAssets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/adminAssets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/adminAssets/js/vendors/select2.min.js"></script>
+    <script src="/adminAssets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/adminAssets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="/adminAssets/js/main.js?v=1.1" type="text/javascript"></script>
+    <script src="/adminAssets/js/categories.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+  
+</body>
+
+</html>

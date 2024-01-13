@@ -1,3 +1,5 @@
+
+
 const inputs = document.querySelectorAll("input"),
 button = document.querySelector("button");
 console.log(inputs)
@@ -48,3 +50,63 @@ input.addEventListener("keyup", (e) => {
 
 //focus the first input which index is 0 on window load
 window.addEventListener("load", () => inputs[0].focus());
+
+
+
+
+//************** countdown ************\\
+document.addEventListener("DOMContentLoaded", function () {
+  const resendButton = document.getElementById("resendButton");
+  const countdownDisplay = document.getElementById("countDown");
+  const email = document.getElementById('email').getAttribute('mail-data')
+  // console.log(email)
+
+  let countdownTime = 60;
+  function updateTimerDisplay() {
+      countdownDisplay.textContent =` otp resend in ${countdownTime} seconds` ; 
+  }
+  
+  function startCountdown() {
+      resendButton.disabled = true;
+      updateTimerDisplay();
+      
+      const countdownInterval = setInterval(function () {
+          countdownTime--;
+          updateTimerDisplay();
+          if (countdownTime <= 0) {
+              clearInterval(countdownInterval);
+              resendButton.classList.add('active')
+              resendButton.disabled = false;
+              countdownDisplay.textContent = "";
+              return ;
+          }
+      }, 1000);
+  }
+  
+  resendButton.addEventListener("click",async ()=> {
+      const resData = await fetch('/emailVerify',{
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type
+        },
+        body:JSON.stringify({
+          email:email
+        })
+      })
+      console.log(resData)
+      if(resData){
+        console.log("sw")
+      }else{
+        console.log("else")
+      }
+      countdownTime = 60;
+      resendButton.classList.remove('active')
+      startCountdown();
+  });
+  
+  startCountdown();
+});
+$(document).ready(function () {
+      $( ' .preloader' ).fadeOut("slow");
+      setTimeout(function(){ $('.preloader').fadeOut('slow'); }, 3000);
+    });

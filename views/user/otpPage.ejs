@@ -9,12 +9,11 @@
     <link rel="stylesheet" href="/css/otpPage.css" />
     
 </head>
-
+<div class = "preloader"></div>
 <body>
     <div class="container">
-  
-        <h4>Enter OTP Code</h4>
-        <p>we will send an otp to given email</p>
+        <h4><%= message %></h4>
+        <p>A code has been sent to <span id="email" mail-data="<%= user %>"><%= user %></span></p>
         <form action="/otpsignup" method="post">
             <div class="input-field">
                 <input name="noOne" type="number" />
@@ -24,6 +23,9 @@
             </div>
             <button type="submit">Verify OTP</button>
         </form>
+        <button id="resendButton">Resend OTP</button>
+        <div id="countDown"></div> 
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="/js/otpPage.js" ></script>
 <%-include('../layouts/footer') -%>

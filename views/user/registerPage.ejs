@@ -2,61 +2,68 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<title>RegistrationForm_v1 by Colorlib</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>RegistrationForm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- MATERIAL DESIGN ICONIC FONT -->
-	<link rel="stylesheet" href="fonts1/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="fonts1/material-design-iconic-font/css/material-design-iconic-font.min.css">
 
-	<!-- STYLE CSS -->
-	<link rel="stylesheet" href="css1/style.css">
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="css1/style.css">
 </head>
-
+<div class="preloader"></div>
 <body>
-
-	<div class="wrapper" style="background-image: url('images1/bg-registration-form-1.jpg');">
-		<div class="inner">
-			<div class="image-holder">
-				<img src="images1/registration-form-1.jpg" alt="">
-			</div>
-			<form action="/signup" method="post">
-				<h3 class="register-head">Registration Form</h3>
-				<div class="form-wrapper">
-					<p class="messageP">
-						<%= message %>
-					</p>
-				</div>
-				<div class="form-wrapper">
-					<input type="text" name="name" placeholder="Username" class="form-control">
-					<i class="zmdi zmdi-account"></i>
-				</div>
-				<div class="form-wrapper">
-					<input type="text" name="email" placeholder="email" class="form-control">
-					<i class="zmdi zmdi-email"> </i>
-				</div>
-				<div class="form-wrapper">
-					<!-- <select name="" id="" class="form-control">
-							<option value="" disabled selected>Gender</option>
-							<option value="male">Male</option>
-							<option value="femal">Female</option>
-							<option value="other">Other</option>
-						</select> -->
-					<!-- <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i> -->
-				</div>
-				<div class="form-wrapper">
-					<input type="password" name="password" placeholder="Password" class="form-control">
-					<i class="zmdi zmdi-lock"></i>
-				</div>
-				<div class="form-wrapper">
-					<input type="password" name="confirmpassword" placeholder="Confirm Password" class="form-control">
-					<i class="zmdi zmdi-lock"></i>
-				</div>
-				<button type="submit">Register
-					<i class="zmdi zmdi-arrow-right"></i>
-				</button>
-				<!-- <a href="/login">new here?</a> -->
-			</form>
-		</div>
-	</div>
-	<%-include('../layouts/footer') -%>
+   
+    <div class="wrapper" style="background-image: url('images1/bg-registration-form-1.jpg');">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="images1/registration-form-1.jpg" alt="">
+            </div>
+            <form action="/signup" method="post" onsubmit="validateSignup()" id="signUpForm">
+                <h3 class="register-head">Registration Form</h3>
+                <div class="form-wrapper">
+                    <p class="messageP">
+                        <%= message %>
+                    </p>
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" name="name" id="username"  placeholder="Username"
+                        class="form-control">
+                    <i class="zmdi zmdi-account"></i>
+                </div>
+                <div id="fnameError"> username required</div>
+                <div class="form-wrapper">
+                    <input type="text" name="email" id="email" placeholder="Email" class="form-control">
+                    <i class="zmdi zmdi-email"> </i>
+                </div>
+                <div id="femailError">Invalid email</div>
+                <div class="form-wrapper">
+                    <input type="number" name="phone" id="phone" placeholder="Phone" class="form-control">
+                    <i class="zmdi zmdi-email"> </i>
+                </div>
+                <div id="fphoneError">number is required</div>
+                <div class="form-wrapper">
+                </div>
+                <div class="form-wrapper">
+                    <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+                    <i class="zmdi zmdi-lock"></i>
+                </div>
+                <div id="fpasswordError">Password should longer than 6 characters</div>
+                <div class="form-wrapper">
+                    <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password"
+                        class="form-control">
+                    <i class="zmdi zmdi-lock"></i>
+                </div>
+                <div id="fconfirmPasswordError">Confirm password and password must be the same</div>
+                <button type="submit">Register
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+                <a  href="/login" style="text-decoration: none ; font-style: italic;">already here?</a>
+            </form>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/js/userSignUPValidation.js"></script>
+    <%-include('../layouts/footer') -%>

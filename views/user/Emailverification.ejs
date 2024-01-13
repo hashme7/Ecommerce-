@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>RegistrationForm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="fonts1/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="css1/style.css">
+</head>
+<body>
+    <div class = "preloader"></div>
+    <div class="wrapper" style="background-image: url('images1/bg-registration-form-1.jpg');">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="images1/registration-form-1.jpg" alt="">
+            </div>
+            <form action="/emailVerify" method="post" onsubmit="validationOnform(event)">
+                <h3 class="register-head">Reset password</h3>
+                <div class="form-wrapper">
+                    <p class="messageP">
+                        <%= message %>
+                    </p>
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" id="email" name="email" placeholder="Enter Email" class="form-control">
+                    <i class="zmdi zmdi-email"> </i>
+                </div>
+                <p id="emailError">Invalid email</p>
+                <div class="d-flex justify-content-center">
+                    <button  type="submit" class="badge rounded-pill alert-dark" id="sendbtn" style="height: 40px;">
+                        Send
+                        <i class="zmdi zmdi-arrow-right arrowButton"></i>
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/js/resetpassword.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <%-include('../layouts/footer') -%> 
