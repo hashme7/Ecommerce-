@@ -8,6 +8,7 @@ const { dateCheck } = require('../../services/dateFilter')
 const loadSales = async (req, res) => {
     try {
         let orderList = await orders.find({ status: 'Delivered'  }).populate('products.product').populate('user').exec();
+        console.log(orderList,"kldfjk;alsjkdf")
         let filter = req.query?.filter;
         let customDate = req.query?.customDate;
         if (Object.keys(req.body).length) {
@@ -50,7 +51,7 @@ const reportDownload = async (req, res) => {
         }
         if(!orderList.length){
            return res.json({failed:true})
-        }T
+        }
         if (req.params.downloadType == 'PDF') {
             const browser = await puppeteer.launch();
             const page = await browser.newPage();

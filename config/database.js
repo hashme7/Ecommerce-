@@ -7,8 +7,8 @@ exports.connect = () => {
         .then(() => {
             console.log("mongo db is connected");
         })
-        .catch(() => {
-            console.log("error occured");
+        .catch((error) => {
+            console.log("error occured",error);
         });
 }
 
