@@ -33,6 +33,6 @@ app.use("/", userRoute);
 const adminRoute = require('./route/adminRoute')
 app.use('/admin', adminRoute)
 
-app.listen(2020, () => {
-  console.log("http://localhost:2020");
+app.listen(3000, () => {
+  console.log("http://localhost:3000");
 });
