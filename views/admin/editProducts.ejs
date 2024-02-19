@@ -1,97 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Nest Dashboard</title>
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="" />
-        <meta property="og:type" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="/adminAssets/imgs/theme/favicon.svg" />
-        <!-- Template CSS -->
-        <link href="/adminAssets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-    </head>
 
-    <body>
-        <div class="screen-overlay"></div>
-        <aside class="navbar-aside" id="offcanvas_aside">
-            <div class="aside-top">
-                <a href="#" class="logo">
-                    <img src="/adminAssets\imgs\icons\logo-01.png" alt="IMG-LOGO">
-                </a>
-                <div>
-                    <button class="btn btn-icon btn-aside-minimize"><i class="text-muted material-icons md-menu_open"></i></button>
-                </div>
+<head>
+    <meta charset="utf-8" />
+    <title>Nest Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/adminAssets/imgs/theme/favicon.svg" />
+    <!-- Template CSS -->
+    <link href="/adminAssets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+    <!-- cropper js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css"
+        integrity="sha512-bs9fAcCAeaDfA4A+NiShWR886eClUcBtqhipoY5DM60Y1V3BbVQlabthUBal5bq8Z8nnxxiyb1wfGX2n76N1Mw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- sweetalert css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="#" class="logo">
+                <img src="/adminAssets\imgs\icons\logo-01.png" alt="IMG-LOGO">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"><i
+                        class="text-muted material-icons md-menu_open"></i></button>
             </div>
-            <nav>
-                <ul class="menu-aside">
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminDashboard">
-                            <i class="icon material-icons md-home"></i>
-                            <span class="text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/Products">
-                            <i class="icon material-icons md-shopping_bag"></i>
-                            <span class="text">Products</span>
-                        </a>
-                      
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/Orders">     
-                            <i class="icon material-icons md-shopping_cart"></i>
-                            <span class="text">Orders</span>
-                        </a>
-                       
-                    </li>
-                    <li class="menu-item active">
-                        <a class=" menu-link" href="/admin/userslist">
-                            <i class="icon material-icons md-people"></i>
-                            <span class="text">users</span>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/categories">
-                            <i class="icon material-icons md-add_box"></i>
-                            <span class="text">Categories</span>
-                        </a>
-                        
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminBanners">
-                            <i class="icon material-icons md-add_box"></i>
-                            <span class="text">Banners</span>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminBanners">
-                            <i class="icon material-icons md-add_box"></i>
-                            <span class="text">Coupons</span>
-                        </a>
-                       
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminLogout">
-                            <span class="text">Logout</span>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminLogout">
-                            <span class="text">Logout</span>
-                        </a>
-                       
-                    </li>
-                </ul>
-                <hr />
-                <br />
-                <br />
-            </nav>
-        </aside>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminDashboard">
+                        <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/Products">
+                        <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/Orders">
+                        <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class=" menu-link" href="/admin/userslist">
+                        <i class="icon material-icons md-people"></i>
+                        <span class="text">users</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/categories">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Categories</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminBanners">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Banners</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/coupons">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/sales">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Sales</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminLogout">
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+            <hr />
+            <br />
+            <br />
+        </nav>
+    </aside>
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
@@ -156,10 +165,9 @@
                     <div class="content-header">
                         <h2 class="content-title">Add New Product</h2>
                         <h4 id="update-message" style="display: none;">Update Succesfully</h4>
-                        <form method="post" action="/admin/addProducts" id="addForm" enctype="multipart/form-data">
+                        <form method="post" action="/admin/addProducts" id="editForm" enctype="multipart/form-data">
                             <div>
-                                <button type="submit" 
-                                    class="btn btn-md rounded font-sm hover-up">Publish</button>
+                                <button type="submit" class="btn btn-md rounded font-sm hover-up">Publish</button>
                             </div>
                     </div>
                 </div>
@@ -180,16 +188,17 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-4">
+                                <input type="text" name="productId" value="<%= products._id %>" id="product_id" hidden>
                                 <label for="product_name" class="form-label">Product Name</label>
                                 <input type="text" placeholder="Type here" id="name" name="productName"
-                                    class="form-control" id="product_name" value="<%= products.productName%>"/>
-                                        <p id="pnameError"> Invalid product name</p> 
+                                    class="form-control" id="product_name" value="<%= products.productName%>" />
+                                <p id="pnameError"> Invalid product name</p>
                             </div>
                             <div class="mb-4">
                                 <label class="form-label">Full description</label>
                                 <input type="text" placeholder="Type here" id="discription" name="description"
                                     class="form-control" rows="4" value="<%=products.description%>"></input>
-                                    <p id="descriptionError">description is required</p>
+                                <p id="descriptionError">description is required</p>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
@@ -197,8 +206,8 @@
                                         <label class="form-label">Regular price</label>
                                         <div class="row gx-2">
                                             <input placeholder="$" type="number" id="price" class="form-control"
-                                                name="price" value="<%= products.price%>"/>
-                                                <p id="priceError">Regular price must be a positive number</p>
+                                                name="price" value="<%= products.price%>" />
+                                            <p id="priceError">Regular price must be a positive number</p>
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +216,7 @@
                                         <label class="form-label">quantity</label>
                                         <div class="row gx-2">
                                             <input placeholder="$" type="number" id="quantity" class="form-control"
-                                                name="quantity" value="<%=products.quantity%>"/>
+                                                name="quantity" value="<%=products.quantity%>" />
                                             <p id="quantityError">Quantity must be a positive number</p>
                                         </div>
                                     </div>
@@ -222,10 +231,10 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label class="form-label">Category</label>
-                                    <select class="form-select" name="category" >
+                                    <select class="form-select" name="category">
                                         <%for(let i=0 ; i< category.length; i ++){%>
-                                            <option selected="<product.category>">
-                                                <%= category[i].CatName %>
+                                            <option <% if(category[i].name==products.category.name){%>selected <%}%>>
+                                                    <%= category[i].name %>
                                             </option>
                                             <%}%>
                                     </select>
@@ -242,11 +251,18 @@
                             </div>
                             <div class="card-body ">
                                 <div class="input-upload row">
-                                    <div class="col-lg-3">
-                                        <input type="hidden" name="image_1" value="<%= products.images[0]%>">
-                                    </div>
-                                    <input class="form-control" id="choosen-file" type="file" multiple
-                                        accept="image/*"/>
+                                    <% products.images.forEach((images, index)=> { %>
+                                        <div class="col-lg-3" style="padding-bottom: 1%;">
+                                            <img class="product-images" id="img<%= index %>"
+                                                src="/multerimages/<%= images %>" alt="">
+                                        </div>
+                                        <div class="col-lg-3" style="padding-bottom: 1%;">
+                                            <label for="choosen-file<%= index %>" class="btn bg-success">Change
+                                                Image</label>
+                                            <input class="form-control" id="choosen-file<%= index %>" type="file"
+                                                onchange="changeImg(this,'<%= index %>')" hidden />
+                                        </div>
+                                        <% }) %>
                                 </div>
                             </div>
                         </div>
@@ -276,9 +292,16 @@
     <script src="/adminAssets/js/vendors/select2.min.js"></script>
     <script src="/adminAssets/js/vendors/perfect-scrollbar.js"></script>
     <script src="/adminAssets/js/vendors/jquery.fullscreen.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"
+        integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Main Script -->
     <script src="/adminAssets/js/main.js?v=1.1" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js" integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"
+        integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/adminAssets/js/editProduct.js"></script>
 </body>
 

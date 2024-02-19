@@ -90,7 +90,7 @@ const addForm = document.getElementById('addForm');
         add = false;
     }
     if (!filesValid) {
-        event.preventDefault();
+        event.preventDefault();``
         $('#msg-message').css('display', 'block');
         add = false;
     }

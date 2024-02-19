@@ -1,64 +1,335 @@
-<%-include('../layouts/header.ejs')-%>
-<main class="main">
-    <div class="container">
-        <div style="width: 100%; height: 110px; background-color: white;"></div>
-        <div class="tab-pane "  >
-            <h3>Edit Profile</h1>
-            <form action="/editProfile" method="post" id="form" enctype="multipart/form-data" >
-                <div class="text-center mb-4">
-                    <div class="custom-file-upload">
-                        <div class="circular-image-input">
-                            <img src="images/user/orginal/<%= user.image %>" id="profile-picture" alt="Profile Picture">
-                            <input type="file" id="profile-picture-upload" name="img"  accept="image/*" onchange="previewImage(event)">
-                        </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Coza store</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/Chrome-Incognito-Mode-Icon-256.png" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Other CSS -->
+    <link rel="stylesheet" type="text/css" href="userAssets/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/animsition/css/animsition.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/MagnificPopup/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--  custom CSS -->
+    <link rel="stylesheet" type="text/css" href="userAssets/css/util.css">
+    <link rel="stylesheet" href="userAssets/css/style.css">
+    <link rel="stylesheet" href="userAssets/css/myStyle.css">
+    <link rel="stylesheet" href="userAssets/css/main.css">
+    <link rel="stylesheet" href="userAssets/css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="animsition">
+    <!-- Header -->
+    <header class="header-v3">
+        <div class="container-menu-desktop trans-03">
+            <!-- Topbar -->
+            <div class="top-bar">
+                <div class="content-topbar flex-sb-m h-full container">
+                    <div class="left-top-bar">
+                        Free shipping for standard orders over $100
+                    </div>
+
+                    <div class="right-top-bar flex-w h-full">
+                        <a href="/contactUS" class="flex-c-m trans-04 p-lr-25">
+                            Help & FAQs
+                        </a>
+                        <span class="icon-heart1"></span>
+                        <%if(userName){%>
+                            <a href="/profile" class="flex-c-m trans-04 p-lr-25">
+                                <%=userName%>
+                            </a>
+                            <%}else{%>
+                                <a href="/login" class="flex-c-m trans-04 p-lr-25">Account</a>
+                                <%}%>
+                                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                                        EN
+                                    </a>
+
+                                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                                        INR
+                                    </a>
                     </div>
                 </div>
-                <label>Full name *</label>
-                <input type="text" class="form-control" name="name" id="name"  value="<%= user.name %>" required>
-                <p style="color: red;" id="nameLengthError"></p>
-                <div class="row">  
-                    <div class="col-sm-6">
-                        <label>Email *</label>
-                        <input type="email" class="form-control" name="email" id="email" value="<%= user.email %>" required>
-                        <p style="color: red;" id="emailError"></p>
-                    </div><!-- End .col-sm-6 -->
-                    
+            </div>
 
-                    <div class="col-sm-6">
-                        <label>Mobile *</label>
-                        <input type="NUM" class="form-control" name="mobile" id="mobile" value="<%= user.mobile %>" autocomplete="off" required>
-                        <p style="color: red;" id="mobileLngthErrror"></p>
-                    </div><!-- End .col-sm-6 -->
-                    <div class="col-sm-6">
-                        <label>Current password (leave blank to leave unchanged)</label>
-                        <input type="password" class="form-control" name="currentpswd"  >
-                    </div><!-- End .col-sm-6 -->
+            <div class="wrap-menu-desktop">
+                <nav class="limiter-menu-desktop container">
+                    <!-- Logo desktop -->
+                    <a href="#" class="logo">
+                        <img src="images/icons/logo-01.png" alt="IMG-LOGO">
+                    </a>
 
-                    <div class="col-sm-6">
-                        <label>New password (leave blank to leave unchanged)</label>
-                        <input type="password" class="form-control" id="password" name="newpswd"  >
-                        <p style="color: red;" id="passwordLengthError"></p>
-                    </div><!-- End .col-sm-6 -->
-                </div><!-- End .row -->                                   
-                <div >
-                    <% if (typeof error !== 'undefined') { %>
-                      <p style="color: red;"><%= error %></p>
-                    <% } %>
-                      
-                  </div>
-                <button type="submit" class="btn btn-outline-primary-2">
-                    <span>Save change</span>
-                    <i class="icon-long-arrow-right"></i>
-                </button>
-                <div class="pass">
-                    <br>
-                    <a href="forgotPassword">Forgot Password?</a>
-                </div>
-            </form>
+                    <!-- Menu desktop -->
+                    <div class="menu-desktop">
+                        <ul class="main-menu">
+                            <li>
+                                <a href="/home">Home</a>
+                            </li>
+
+                            <li>
+                                <a href="/shop">Shop</a>
+                            </li>
+
+                            <li>
+                                <a href="/aboutUs">About</a>
+                            </li>
+
+                            <li>
+                                <a href="/contactUS">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Icon header -->
+                    <div class="wrap-icon-header flex-w flex-r-m">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                            <i class="zmdi zmdi-search"></i>
+                        </div>
+
+                        <a href="/cart">
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                        </a>
+
+                        <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                            <i class="zmdi zmdi-favorite-outline"></i>
+                        </a>
+
+                        <a href="/profile">
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-user">
+                                <i class="zmdi zmdi-account-circle"></i>
+                            </div>
+                        </a>
+                    </div>
+                </nav>
+            </div>
         </div>
-        <div style="width: 100%; height: 110px; background-color: white;"></div>
-    </div><!-- End .container -->
-</main><!-- End .main -->
 
-<script src="user/js/formValidation.js"></script>
-<%- include('../layouts/footer.ejs') -%>
+        <!-- Header Mobile -->
+        <div class="wrap-header-mobile">
+            <!-- Logo mobile -->
+            <div class="logo-mobile">
+                <a href="/"><img src="" alt="IMG-LOGO"></a>
+            </div>
+
+            <!-- Icon header -->
+            <div class="wrap-icon-header flex-w flex-r-m m-r-15">
+                <a href="/cart">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10  js-show-cart">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
+                </a>
+
+                <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 ">
+                    <i class="zmdi zmdi-favorite-outline"></i>
+                </a>
+                <a href="/profile">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-user">
+                        <i class="zmdi zmdi-account-circle"></i>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Button to show menu on mobile -->
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="menu-mobile">
+            <ul class="main-menu-m">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+
+                <li>
+                    <a href="/shop">Shop</a>
+                </li>
+
+
+                <li>
+                    <a href="/aboutUs">About</a>
+                </li>
+
+                <li>
+                    <a href="/contactUs">Contact</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Modal Search -->
+        <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+            <div class="container-search-header">
+                <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+                    <img src="images/icons/icon-close2.png" alt="CLOSE">
+                </button>
+
+                <form class="wrap-search-header flex-w p-l-15" action="/filter" method="get">
+                    <button class="flex-c-m trans-04">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+                    <input class="plh3" type="text" name="search" placeholder="Search...">
+                    <input type="radio" name="sort" value="0" checked hidden>
+                    <input type="radio" name="price" value="0-10000000000" checked hidden>
+                    <input type="radio" name="category" value="all" checked hidden>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-02.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Converse All Star
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $39.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-03.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Nixon Porter Leather
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $17.00
+							</span>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: $75.00
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+    <main class="main">
+        <div class="container">
+            <div style="width: 100%; height: 110px; background-color: white;"></div>
+            <div class="tab-pane ">
+                <h3>Edit Profile</h1>
+                    <form method="post" id="form" enctype="multipart/form-data">
+                        <h2 id="result"></h2>
+                        <label>Full name *</label>
+                        <input type="text" class="form-control" name="name" id="name" value="<%= user.name %>" >
+                        <p id="nameLengthError">name is required*</p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Email *</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    value="<%= user.email %>"  disabled>
+                            </div><!-- End .col-sm-6 -->
+
+
+                            <div class="col-sm-6">
+                                <label>Mobile *</label>
+                                <input type="NUM" class="form-control" name="mobile" id="mobile"
+                                    value="<%= user.mobile %>"  >
+                                <p  id="mobileLngthErrror"></p>
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-6">
+                                <label>Current password (leave blank to leave unchanged)</label>
+                                <input type="password" class="form-control" id="currentpswd" name="currentpswd">
+                                <p  id="crntPswdError">Password should longer than 6 characters*</p>
+                            </div><!-- End .col-sm-6 -->
+
+                            <div class="col-sm-6">
+                                <label>New password (leave blank to leave unchanged)</label>
+                                <input type="password" class="form-control" id="newpswd" name="newpswd">
+                                <p  id="newPasswordError">Password should longer than 6 characters*</p>
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+                        <button type="submit" class="btn btn-outline-primary-2">
+                            <span>Save change</span>
+                            <i class="icon-long-arrow-right"></i>
+                        </button>
+                        <div class="pass">
+                            <br>
+                            <a href="/emailVerify">Forgot Password?</a>
+                        </div>
+                    </form>
+            </div>
+            <div style="width: 100%; height: 110px; background-color: white;"></div>
+        </div><!-- End .container -->
+    </main><!-- End .main -->
+
+   <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+   <script src="userAssets/js/editProfile.js"></script>
+    
+    <%- include('../layouts/footer.ejs') -%>

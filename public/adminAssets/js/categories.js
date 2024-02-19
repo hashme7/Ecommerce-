@@ -2,8 +2,8 @@ const actionBtn = document.getElementById('BlockBtn')
 let popUpForm = document.getElementById('formContainer');
 let AddPopForm = document.getElementById('addCategoryForm')
 let iddiscription = document.getElementById('discription')
-let idCatName = document.getElementById('CatName')
-blockAndUnblock = async (CatName, action, event) => {
+let idCatName = document.getElementById('name')
+blockAndUnblock = async (name, action, event) => {
     if (action == 'true') {
         console.log("unblocking")
         let response = await swal.fire({
@@ -19,9 +19,9 @@ blockAndUnblock = async (CatName, action, event) => {
         if (!response.isConfirmed) {
             e.preventDefault();
         } else {
-            await $.ajax({
+            $.ajax({
                 url:
-                    `/admin/unBlockCategory?CatName=${CatName}`,
+                    `/admin/unBlockCategory?name=${name}`,
                 type: "POST",
                 success: function (data) {
                     console.log(data)
@@ -49,7 +49,7 @@ blockAndUnblock = async (CatName, action, event) => {
             event.preventDefault();
         } else {
             $.ajax({
-                url: `/admin/blockCategory?CatName=${CatName}`,
+                url: `/admin/blockCategory?name=${name}`,
                 type: "POST",
                 success: function (data) {
                     $('#messageDiv').text(data.messge)
@@ -85,7 +85,7 @@ formModal = async (catId) => {
                 console.log(responseData)
                 catIdForEdit = responseData.message._id;
                 iddiscription.value = responseData.message.discription;
-                idCatName.value = responseData.message.CatName;
+                idCatName.value = responseData.message.name;
                 popUpForm.classList.add('editform-control');
             } else {
                 console.log("something went wrong", response)
@@ -120,7 +120,7 @@ const debouncedValid = debounce(async (event, decider) => {
         if (decider) {
             let AddCatName = document.getElementById('AddCatName').value;
             console.log(AddCatName);
-            let response = await fetch(`/admin/findCategories?CatName=${AddCatName}`);
+            let response = await fetch(`/admin/findCategories?name=${AddCatName}`);
             console.log(response)
             if (response) {
                 let resData = await response.json();
@@ -138,7 +138,7 @@ const debouncedValid = debounce(async (event, decider) => {
                 console.log(error);
             }
         } else {
-            let response = await fetch(`/admin/findCategories?CatName=${idCatName.value}`);
+            let response = await fetch(`/admin/findCategories?name=${idCatName.value}`);
             if (response) {
                 let resData = await response.json();
                 if (!resData.message) {
@@ -163,13 +163,13 @@ const debouncedValid = debounce(async (event, decider) => {
 
 editFormsub = async () => {
     try {
-        let CatNameIN = document.getElementById('CatName').value
+        let CatNameIN = document.getElementById('name').value
         let discIN = document.getElementById('discription').value
-        let valData = validation($('#CatName').val(), $('#discription').val(),$('#EerorMsCat'),$('#EerorMsDis'))
+        let valData = validation($('#name').val(), $('#discription').val(), $('#EerorMsCat'), $('#EerorMsDis'))
         if (!valData) {
             return false
         } else {
-            let response = await fetch(`/admin/editCategory?findCatId=${catIdForEdit}&&discription=${discIN}&&CatName=${CatNameIN}`, {
+            let response = await fetch(`/admin/editCategory?findCatId=${catIdForEdit}&&discription=${discIN}&&name=${CatNameIN}`, {
                 method: "PATCH"
             })
             let res = await response.json();
@@ -191,50 +191,58 @@ editFormsub = async () => {
 }
 addCategory = async (event) => {
     try {
-        let valid = validation( $('#AddCatName').val(),$('#Adddiscription').val(),$('#erorMsCat'),$('#erorMsDis'));
+        let valid = validation($('#AddCatName').val(), $('#Adddiscription').val(), $('#erorMsCat'), $('#erorMsDis'));
         console.log(valid)
         if (!valid) {
             event.preventDefault();
             return false;
         } else {
-                let res = await fetch('/admin/addCategories', {
-                    method: "POST"
-                    ,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        CatName: document.getElementById('AddCatName').value,
-                        discription: document.getElementById('Adddiscription').value
-                    })
+            let res = await fetch('/admin/addCategories', {
+                method: "POST"
+                ,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: document.getElementById('AddCatName').value,
+                    discription: document.getElementById('Adddiscription').value
                 })
-                let result = await res.json();
-                if (result.ok) {
-                    if (result.message) {
-                        closeAddModal();
+            })
+            event.preventDefault();
+            let result = await res.json();
+            if (result.ok) {
+                if (result.message) {
+                    closeAddModal();
+                    let swalRes = await Swal.fire({
+                        title: "Added",
+                        text: "Category added succesfully!",
+                        icon: "success"
+                    });
+                    if (swalRes.isConfirmed) {
                         reloadTable()
                         document.getElementById('messageBox').innerHTML = result.message;
                     }
                 }
+            }
         }
     } catch (error) {
         console.log("error on AddCategory :", error)
     }
 }
 
-const validation = (CatName, discription,errDivC,errDivD) => {
-    console.log(CatName, discription)
+const validation = (name, discription, errDivC, errDivD) => {
+    console.log(name, discription)
     let regex = /^\s/;
-    console.log(regex.test(CatName)); 
-    console.log(":-",CatName)
-    if (regex.test(CatName)||CatName==="") {
+    console.log(regex.test(name));
+    console.log(":-", name)
+    if (regex.test(name) || name === "") {
         errDivC.text('invalid Catergory name').css('color', 'brown')
         return false;
     } else {
         errDivC.text('')
     }
     if (regex.test(discription)) {
-       errDivD.text('invalid discription').css('color', 'brown')
+        errDivD.text('invalid discription').css('color', 'brown')
         return false;
     } else {
         errDivD.text('')

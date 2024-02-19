@@ -17,12 +17,12 @@ let transporter = nodemailer.createTransport({
 let mailSender = async (email,id,htmlContent) => {
   try {
       const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
+      console.log(email,"*****************",id,"*************")
       const mailOptions = {
           from: process.env.NODE_MAILER_EMAIL,
           to: email,
           subject: "OTP VERIFICATION",
           html: `${htmlContent}
-
           <h1>${otp}<h1>`,
       };
       // Send the email
@@ -36,7 +36,7 @@ let mailSender = async (email,id,htmlContent) => {
       await newOtp.save();
       console.log("Email sent successfully");
   } catch (error) {
-      console.error("Error sending dsfdfs email:", error);
+      console.error("Error sending  email:", error);
     }
 };
 

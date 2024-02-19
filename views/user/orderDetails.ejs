@@ -1,0 +1,130 @@
+<%- include('../layouts/header') -%>
+    <div style="width: 100%; height: 77px; background-color: white;"></div>
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/profile">My Account</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Order</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <main class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="card card-dashboard">
+                        <div class="card-body">
+                            <h3 class="card-title">Delivery Address</h3>
+                            <p>Name: <%= order.address[0].name %><br>
+                                    Mobile: <%= order.address[0].mobile %><br>
+                                        State: <%= order.address[0].state %><br>
+                                            City: <%= order.address[0].city %><br>
+                                                House Name: <%= order.address[0].house %><br>
+                                                    Pincode: <%= order.address[0].pincode %><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card card-dashboard">
+                        <div class="card-body">
+                            <h3 class="card-title">Order Summary</h3>
+                            <p>OrdeId: <%= order._id %><br>
+                                    Date: <%= order.orderedDate.toLocaleDateString('en-US', { year:'numeric',
+                                        month: 'short' , day: '2-digit' }).replace(/\//g, '-' ) %><br>
+                                        Time: <%= order.orderedDate.toLocaleTimeString(); %><br>
+                                            Items: <%= order.products.length %><br>
+                                                Shipping:<%= order.shippingMethod %><br>
+                                                    Total Amount: <%= order.totalAmount %><br>
+                                                        Payment Method: <%= order.paymentStatus %><br>
+                                                            <%if(order.couponUsed){ %>
+                                                                Used Coupon :<%= order.couponUsed %>
+                                                                    <br>
+                                                                    <%}%>
+                                                                        Status: <%= order.status %><br>
+                                                                            <% if(order.status=="Cancelled" ) { %>
+                                                                                cancel Reason:<%= order.cancelReason %>
+                                                                                    <% } %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="card card-dashboard">
+                        <div class="card-body">
+                            <h3 class="card-title">Invoice Download</h3>
+                            <button style="background-color: rgb(51, 49, 49); padding: 4px; border-radius: 2px;"
+                                onclick="downloadInvoice('<%= order._id %>')">
+                                <span style="color: goldenrod;">
+                                    Download
+                                </span>
+
+                            </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-b-45">
+                <h4 class="ltext-106 cl5 txt-center">
+                    Products
+                </h4>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-dashboard">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <% order.products.forEach(function(product,index) { %>
+                                            <tr>
+                                                <td>
+                                                    <img src="/multerimages/<%= product.product.images[0] %>" alt=""
+                                                        class="img-thumbnail" style="max-width: 80px;">
+                                                </td>
+                                                <td>
+                                                    <a href="/product?_id=<%= product.product._id %>">
+                                                        <%= product.product.productName %>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <%= product.product.category.name %>
+                                                </td>
+                                                <td>
+                                                    <%= product.quantity %>
+                                                </td>
+                                                <td> ₹<%= product.product.price %>
+                                                </td>
+                                                <td> ₹<%= product.quantity*product.product.price %>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% if(order.status !=='cancel' && order.status !=='Delivered' ) { %>
+                <button type="button" class="btn btn-danger btn-block" onclick="cancelOrder('<%= order._id %>')">Cancel
+                    Order</button>
+                <% }else if(order.status=='Delivered' ){%>
+                    <button type="button" class="btn btn-danger btn-block"
+                        onclick="returnOrder('<%= order._id %>')">Return</button>
+                    <% }else if(order.status=='Return Requested' ){ %>
+                        <p>order return Requested</p>
+                        <% }else if(order.status=='Returned' ){ %>
+                            <p>order Returned</p>
+                            <%}else if(order.status=='Cancelled' ){%>
+                                <p>order Cancelled</p>
+                                <%}%>
+                                    <div style="width: 100%; height: 77px; background-color: white;"></div>
+        </div><!-- End .container -->
+    </main><!-- End .main -->
+
+    <script src="userAssets/js/orderDetails.js"></script>
+    <%- include('../layouts/footer') -%>

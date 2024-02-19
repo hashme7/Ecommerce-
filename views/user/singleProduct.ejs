@@ -1,585 +1,356 @@
-<%-include('../layouts/header')-%>
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html lang="en">
 
-    <body class="animsition">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.png" />
+    <!-- =============================================================================================== -->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/daterangepicker/daterangepicker.css">
+    <!-- =============================================================================================== -->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/slick/slick.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/MagnificPopup/magnific-popup.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="userAssets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="userAssets/css/util.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="userAssets/css/stylesheet.css">
 
-        <!-- Header -->
-        <header>
-            <!-- Header desktop -->
-            <div class="container-menu-desktop">
-                <!-- Topbar -->
-                <div class="top-bar">
-                    <div class="content-topbar flex-sb-m h-full container">
-                        <div class="left-top-bar">
-                            Free shipping for standard order over $100
-                        </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 
-                        <div class="right-top-bar flex-w h-full">
-                            <a href="#" class="flex-c-m trans-04 p-lr-25">
-                                Help & FAQs
+
+    <link rel="stylesheet" media="print" href="print.css">
+    <link rel="stylesheet" media="screen" href="screen.css">
+    <link rel="stylesheet" media="screen and (min-width: 480px)" href="example1.css">
+    <link rel="stylesheet" media="screen and (min-width: 701px) and (max-width: 900px)" href="example2.css">
+
+</head>
+
+<body class="animsition">
+    <!-- Header -->
+    <header>
+        <div class="container-menu-desktop ">
+            <!-- Topbar -->
+            <div class="top-bar">
+                <div class="content-topbar flex-sb-m h-full container">
+                    <div class="left-top-bar">
+                        Free shipping for standard orders over $100
+                    </div>
+
+                    <div class="right-top-bar flex-w h-full">
+                        <a href="/contactUS" class="flex-c-m trans-04 p-lr-25">
+                            Help & FAQs
+                        </a>
+                        <span class="icon-heart1"></span>
+                        <%if(userName){%>
+                            <a href="/profile" class="flex-c-m trans-04 p-lr-25">
+                                <%=userName%>
                             </a>
+                            <%}else{%>
+                                <a href="/login" class="flex-c-m trans-04 p-lr-25">Account</a>
+                                <%}%>
+                                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                                        EN
+                                    </a>
 
-
-                            <%if(user){%>
-                                <span class="icon-heart1"></span>
-                                <a href="/profile" class="flex-c-m trans-04 p-lr-25">
-                                    <%=user.name%>
-                                </a>
-                                <% }else{%>
-                                    <a href="/login" class="flex-c-m trans-04 p-lr-25">Account</a>
-                                    <%}%>
-
-                                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                                            EN
-                                        </a>
-
-                                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                                            USD
-                                        </a>
-                        </div>
+                                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                                        INR
+                                    </a>
                     </div>
                 </div>
+            </div>
 
-                <div class="wrap-menu-desktop">
-                    <nav class="limiter-menu-desktop container">
+            <div class="wrap-menu-desktop">
+                <nav class="limiter-menu-desktop container">
+                    <!-- Logo desktop -->
+                    <a href="#" class="logo">
+                        <img src="images/icons/logo-01.png" alt="IMG-LOGO">
+                    </a>
 
-                        <!-- Logo desktop -->
-                        <a href="#" class="logo">
-                            <img src="images/icons/logo-01.png" alt="IMG-LOGO">
-                        </a>
+                    <!-- Menu desktop -->
+                    <div class="menu-desktop">
+                        <ul class="main-menu">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
 
-                        <!-- Menu desktop -->
-                        <div class="menu-desktop">
-                            <ul class="main-menu">
-                                <li class="active-menu">
-                                    <a href="/home">Home</a>
-                                </li>
+                            <li>
+                                <a href="/shop">Shop</a>
+                            </li>
 
-                                <li>
-                                    <a href="/shop">Shop</a>
-                                </li>
+                            <li>
+                                <a href="/aboutUs">About</a>
+                            </li>
 
-                                <li>
-                                    <a href="about.html">About</a>
-                                </li>
+                            <li>
+                                <a href="/contactUS">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
 
-                                <li>
-                                    <a href="contact.html">Contact</a>
-                                </li>
-                            </ul>
+                    <!-- Icon header -->
+                    <div class="wrap-icon-header flex-w flex-r-m">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                            <i class="zmdi zmdi-search"></i>
                         </div>
 
-                        <!-- Icon header -->
-                        <div class="wrap-icon-header flex-w flex-r-m">
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                                <i class="zmdi zmdi-search"></i>
-                            </div>
-
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                                data-notify="2">
+                        <a href="/cart">
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
+                        </a>
 
-                            <a href="#"
-                                class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                                data-notify="0">
-                                <i class="zmdi zmdi-favorite-outline"></i>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
+                        <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                            <i class="zmdi zmdi-favorite-outline"></i>
+                        </a>
+
+                        <a href="/profile">
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-user">
+                                <i class="zmdi zmdi-account-circle"></i>
+                            </div>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Header Mobile -->
+        <div class="wrap-header-mobile">
+            <!-- Logo mobile -->
+            <div class="logo-mobile">
+                <a href="/"><img src="" alt="IMG-LOGO"></a>
             </div>
 
-            <!-- Header Mobile -->
-            <div class="wrap-header-mobile">
-                <!-- Logo moblie -->
-                <div class="logo-mobile">
-                    <a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <!-- Icon header -->
+            <div class="wrap-icon-header flex-w flex-r-m m-r-15">
+                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+                    <i class="zmdi zmdi-search"></i>
                 </div>
 
-                <!-- Icon header -->
-                <div class="wrap-icon-header flex-w flex-r-m m-r-15">
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-                        <i class="zmdi zmdi-search"></i>
-                    </div>
-
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                        data-notify="2">
+                <a href="/cart">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10  js-show-cart">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
+                </a>
 
-                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-                        data-notify="0">
-                        <i class="zmdi zmdi-favorite-outline"></i>
-                    </a>
-                </div>
-
-                <!-- Button show menu -->
-                <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
-                </div>
+                <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 ">
+                    <i class="zmdi zmdi-favorite-outline"></i>
+                </a>
+                <a href="/profile">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-user">
+                        <i class="zmdi zmdi-account-circle"></i>
+                    </div>
+                </a>
             </div>
 
-
-            <!-- Menu Mobile -->
-            <div class="menu-mobile">
-                <ul class="topbar-mobile">
-                    <li>
-                        <div class="left-top-bar">
-                            Free shipping for standard order over $100
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="right-top-bar flex-w h-full">
-                            <a href="#" class="flex-c-m p-lr-10 trans-04">
-                                Help & FAQs
-                            </a>
-
-                            <a href="/signup" class="flex-c-m p-lr-10 trans-04">
-                                My Account
-                            </a>
-
-                            <a href="#" class="flex-c-m p-lr-10 trans-04">
-                                EN
-                            </a>
-
-                            <a href="#" class="flex-c-m p-lr-10 trans-04">
-                                USD
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul class="main-menu-m">
-                    <li>
-                        <a href="/home">Home</a>
-                        <span class="arrow-main-menu-m">
-                            <i class="fa fa-angle-right" aria-hidden="true"></i>
-                        </span>
-                    </li>
-
-                    <li>
-                        <a href="/shop">Shop</a>
-                    </li>
-
-                    <li>
-                        <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-                    </li>
-
-                    <li>
-                        <a href="blog.html">Blog</a>
-                    </li>
-
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
+            <!-- Button to show menu on mobile -->
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
             </div>
+        </div>
 
-            <!-- Modal Search -->
-            <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-                <div class="container-search-header">
-                    <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                        <img src="images/icons/icon-close2.png" alt="CLOSE">
+        <!-- Mobile Menu -->
+        <div class="menu-mobile">
+            <ul class="main-menu-m">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+
+                <li>
+                    <a href="/shop">Shop</a>
+                </li>
+
+
+                <li>
+                    <a href="/aboutUs">About</a>
+                </li>
+
+                <li>
+                    <a href="/contactUs">Contact</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Modal Search -->
+        <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+            <div class="container-search-header">
+                <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+                    <img src="images/icons/icon-close2.png" alt="CLOSE">
+                </button>
+
+                <form class="wrap-search-header flex-w p-l-15" action="/filter" method="get">
+                    <button class="flex-c-m trans-04">
+                        <i class="zmdi zmdi-search"></i>
                     </button>
-
-                    <form class="wrap-search-header flex-w p-l-15">
-                        <button class="flex-c-m trans-04">
-                            <i class="zmdi zmdi-search"></i>
-                        </button>
-                        <input class="plh3" type="text" name="search" placeholder="Search...">
-                    </form>
-                </div>
-            </div>
-        </header>
-        <!-- Banner -->
-        <div class="sec-banner bg0 p-t-50 p-b-20">
-            <div class="container">
-
+                    <input class="plh3" type="text" name="search" placeholder="Search...">
+                    <input type="radio" name="sort" value="0" checked hidden>
+                    <input type="radio" name="price" value="0-10000000000" checked hidden>
+                    <input type="radio" name="category" value="all" checked hidden>
+                </form>
             </div>
         </div>
+    </header>
+    <!-- Banner -->
+    <div class="sec-banner bg0 p-t-50 p-b-20">
+        <div class="container">
+
         </div>
-
-        
-        <div class="container-fluid" id="productlist">
-            <nav aria-label="breadcrumb" class="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#" style="list-style: none; color: black;">Shop</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">product</li>
-                </ol>
-              </nav>
-            <div class="row pt-5 pb-5 pl-2">
-                <div class="col-lg-6 col-md-12 col-12">
-                    <div class="row">
-                        <div class="col-md-4 pt-0">
-                            <div class="carousel-indicators- controller-slider">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                    class="active slider-butten" aria-current="true" aria-label="Slide 1"
-                                    style="background-image: url('multerimages/<%= product.images[0]%>'); background-size: cover;"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                    class="slider-butten-2" aria-label="Slide 2"
-                                    style="background-image: url('multerimages/<%= product.images[1]%>');"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                    class="slider-butten-3" aria-label="Slide 3"
-                                    style="background-image: url('multerimages/<%= product.images[2]%>');"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                                    class="slider-butten-4" aria-label="Slide 4"
-                                    style="background-image: url('multerimages/<%= product.images[3]%>');"></button>
-                            </div>
-                        </div>
-                        <div class="col-md-5 sec-product">
-                            <div id="carouselExampleIndicators" class="carousel slide carousel-fade">
-
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active product-img">
-                                        <img src="multerimages/<%= product.images[0]%>" class="d-block w-100"
-                                            alt="...">
-                                    </div>
-                                    <div class="carousel-item product-img">
-                                        <img src="multerimages/<%= product.images[1]%>" class="d-block w-100"
-                                            alt="...">
-                                    </div>
-                                    <div class="carousel-item product-img">
-                                        <img src="multerimages/<%= product.images[2]%>" class="d-block w-100"
-                                            alt="...">
-                                    </div>
-                                    <div class="carousel-item product-img">
-                                        <img src="multerimages/<%= product.images[3]%>" class="d-block w-100"
-                                            alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <!-- <div class="col-lg-5 col-md-12 col-12 pt-5 "> -->
-                    <div class="container-fluid product-sec-1">
-                        <h1 class="prodcut-sec-1-h">
-                            <%= product.productName%>
-                        </h1>
-                        <h4 class="prodcut-h-price"><del class="prodcut-h-del-price">
-                                MRP:<%= product.price%>.00
-                            </del><%=(product.price-product.offer)%>.00 Rs</h4>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-6">
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="star pb-3" style="font-size: 15px; border-bottom: 1px solid gray;">
-                        </div>
-                        <div class="pt-4 product-sec-1-p">
-                            <p><%= product.description %></p>
-                        </div>
-                        <div class="pb-4">
-                            <button type="button" class="btn product-cart-butten">Add to cart</button>
-                            <button type="button" class="btn product-cart-icon">
-                                    Add to whishlist
-                                </button>
-                            <div class="pt-2">
-                                <button type="button" class="btn product-buy-butten">Buy Now</button>
-                            </div>
-                        </div>
-                        <div class="product-detils pt-4 ">
-                            <div class="row" style="">
-                                <p>
-                                    <%=product.category%>
-                                </p>
-                                <p>Tags: Hot, Trend</p>
-                            </div>
-                        </div>
-                        <!-- </div> -->
-                                  
-                    </div>
-                </div>
-            </div>
-        </div>
-
- <section>
-    <div class="container-fluid">
-        <div class="product-sec-2 pt-3 pb-5">
-            <h2 class="product-sec-2-h">Description</h2>
-            <div class="product-sec-2-p-">
-                <p class="product-sec-2-p"><%= product.description%></p>
-            </div>
-        </div>
-</section>
-
-        <!-- Footer -->
-        <footer class="bg3 p-t-75 p-b-32">
-            <div class="container">
+    </div>
+    </div>
+    <div class="container-fluid" id="productlist">
+        <nav aria-label="breadcrumb" class="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" style="list-style: none; color: black;">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">product</li>
+            </ol>
+        </nav>
+        <div class="row pt-5 pb-5 pl-2">
+            <div class="col-lg-6 col-md-12 col-12">
                 <div class="row">
-                    <div class="col-sm-6 col-lg-3 p-b-50">
-                        <h4 class="stext-301 cl0 p-b-30">
-                            Categories
-                        </h4>
-
-                        <ul>
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Women
-                                </a>
-                            </li>
-
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Men
-                                </a>
-                            </li>
-
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Shoes
-                                </a>
-                            </li>
-
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Watches
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-3 p-b-50">
-                        <h4 class="stext-301 cl0 p-b-30">
-                            Help
-                        </h4>
-
-                        <ul>
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Track Order
-                                </a>
-                            </li>
-
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Returns
-                                </a>
-                            </li>
-
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Shipping
-                                </a>
-                            </li>
-
-                            <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    FAQs
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-3 p-b-50">
-                        <h4 class="stext-301 cl0 p-b-30">
-                            GET IN TOUCH
-                        </h4>
-
-                        <p class="stext-107 cl7 size-201">
-                            Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018
-                            or call
-                            us on (+1) 96 716 6879
-                        </p>
-
-                        <div class="p-t-27">
-                            <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-
-                            <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                                <i class="fa fa-instagram"></i>
-                            </a>
-
-                            <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                                <i class="fa fa-pinterest-p"></i>
-                            </a>
+                    <div class="col-md-4 pt-0">
+                        <input type="hidden" class="form-control" name="_id" id="product" value="<%= product._id %>"
+                            required>
+                        <div class="carousel-indicators- controller-slider">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active slider-butten" aria-current="true" aria-label="Slide 1"
+                                style="background-image: url('multerimages/<%= product.images[0]%>'); background-size: cover;"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                class="slider-butten-2" aria-label="Slide 2"
+                                style="background-image: url('multerimages/<%= product.images[1]%>');"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                class="slider-butten-3" aria-label="Slide 3"
+                                style="background-image: url('multerimages/<%= product.images[2]%>');"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                                class="slider-butten-4" aria-label="Slide 4"
+                                style="background-image: url('multerimages/<%= product.images[3]%>');"></button>
                         </div>
                     </div>
+                    <div class="col-md-5 sec-product">
+                        <div id="carouselExampleIndicators" class="carousel slide carousel-fade">
 
-                    <div class="col-sm-6 col-lg-3 p-b-50">
-                        <h4 class="stext-301 cl0 p-b-30">
-                            Newsletter
-                        </h4>
-
-                        <form>
-                            <div class="wrap-input1 w-full p-b-4">
-                                <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
-                                    placeholder="email@example.com">
-                                <div class="focus-input1 trans-04"></div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active product-img">
+                                    <img src="multerimages/<%= product.images[0]%>" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item product-img">
+                                    <img src="multerimages/<%= product.images[1]%>" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item product-img">
+                                    <img src="multerimages/<%= product.images[2]%>" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item product-img">
+                                    <img src="multerimages/<%= product.images[3]%>" class="d-block w-100" alt="...">
+                                </div>
                             </div>
-
-                            <div class="p-t-18">
-                                <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-                                    Subscribe
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="p-t-40">
-                    <div class="flex-c-m flex-w p-b-18">
-                        <a href="#" class="m-all-1">
-                            <img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
-                        </a>
-
-                        <a href="#" class="m-all-1">
-                            <img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
-                        </a>
-
-                        <a href="#" class="m-all-1">
-                            <img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
-                        </a>
-
-                        <a href="#" class="m-all-1">
-                            <img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
-                        </a>
-
-                        <a href="#" class="m-all-1">
-                            <img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
-                        </a>
+            <div class="col-lg-6">
+                <!-- <div class="col-lg-5 col-md-12 col-12 pt-5 "> -->
+                <div class="container-fluid product-sec-1">
+                    <h1 class="prodcut-sec-1-h">
+                        <%= product.productName%>
+                    </h1>
+                    <h4 class="prodcut-h-price"><del class="prodcut-h-del-price">
+                            MRP:<%= product.price%>.00
+                        </del><%=(product.price-product.offer)%>.00 Rs</h4>
+                    <div class="pt-4 product-sec-1-p">
+                        <p>
+                            <%= product.description %>
+                        </p>
                     </div>
-
-                    <p class="stext-107 cl6 txt-center">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | Made
-                        with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com"
-                            target="_blank">ThemeWagon</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
+                    <div class="star pb-3" style="font-size: 15px; border-bottom: 1px solid gray;">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <%if( product.quantity>0){%>
+                                <div class="col-lg-12">
+                                    <%if(product.quantity>10){%>
+                                        <strong>(in stock)</strong>
+                                        <%= product.quantity%>
+                                            <% }else{ %>
+                                                <strong>(in stock)</strong>
+                                                <p>only <%=product.quantity%>left</p>
+                                                <%}%>
+                                </div>
+                                <%}else{%>
+                                    <div class="col-lg-6">
+                                        <strong style="color: brown;">(out of stock)</strong>
+                                    </div>
+                                    <%}%>
+                        </div>
+                    </div>
+                    <div class="pb-4">
+                        <button type="button" class="btn product-cart-butten" id="AddToCart">Add to cart</button>
+                        <button type="button" class="btn product-cart-icon">
+                            Add to whishlist
+                        </button>
+                        <div class="pt-2">
+                            <button type="button" class="btn product-buy-butten">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-detils pt-4 ">
+                        <div class="row">
+                            <p>
+                                <%=product.category%>
+                            </p>
+                            <p>Tags: Hot, Trend</p>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                              
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container-fluid">
+            <div class="product-sec-2 pt-3 pb-5">
+                <h2 class="product-sec-2-h">Description</h2>
+                <div class="product-sec-2-p-">
+                    <p class="product-sec-2-p">
+                        <%= product.description%>
                     </p>
                 </div>
             </div>
-        </footer>
+    </section>
+    <script src="userAssets/js/singleproductlist.js"></script>
 
-
-        <!-- Back to top -->
-        <div class="btn-back-to-top" id="myBtn">
-            <span class="symbol-btn-back-to-top">
-                <i class="zmdi zmdi-chevron-up"></i>
-            </span>
-        </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/animsition/js/animsition.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/select2/select2.min.js"></script>
-        <script>
-            $(".js-select2").each(function () {
-                $(this).select2({
-                    minimumResultsForSearch: 20,
-                    dropdownParent: $(this).next('.dropDownSelect2')
-                });
-            })
-        </script>
-        <!--===============================================================================================-->
-        <script src="vendor/daterangepicker/moment.min.js"></script>
-        <script src="vendor/daterangepicker/daterangepicker.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/slick/slick.min.js"></script>
-        <script src="js/slick-custom.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/parallax100/parallax100.js"></script>
-        <script>
-            $('.parallax100').parallax100();
-        </script>
-        <!--===============================================================================================-->
-        <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-        <script>
-            $('.gallery-lb').each(function () { // the containers for all your galleries
-                $(this).magnificPopup({
-                    delegate: 'a', // the selector for gallery item
-                    type: 'image',
-                    gallery: {
-                        enabled: true
-                    },
-                    mainClass: 'mfp-fade'
-                });
-            });
-        </script>
-        <!--===============================================================================================-->
-        <script src="vendor/isotope/isotope.pkgd.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/sweetalert/sweetalert.min.js"></script>
-        <script>
-            $('.js-addwish-b2').on('click', function (e) {
-                e.preventDefault();
-            });
-
-            $('.js-addwish-b2').each(function () {
-                var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-                $(this).on('click', function () {
-                    swal(nameProduct, "is added to wishlist !", "success");
-
-                    $(this).addClass('js-addedwish-b2');
-                    $(this).off('click');
-                });
-            });
-
-            $('.js-addwish-detail').each(function () {
-                var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-                $(this).on('click', function () {
-                    swal(nameProduct, "is added to wishlist !", "success");
-
-                    $(this).addClass('js-addedwish-detail');
-                    $(this).off('click');
-                });
-            });
-
-            /*---------------------------------------------*/
-
-            $('.js-addcart-detail').each(function () {
-                var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-                $(this).on('click', function () {
-                    swal(nameProduct, "is added to cart !", "success");
-                });
-            });
-
-        </script>
-        <!--===============================================================================================-->
-        <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-        <script>
-            $('.js-pscroll').each(function () {
-                $(this).css('position', 'relative');
-                $(this).css('overflow', 'hidden');
-                var ps = new PerfectScrollbar(this, {
-                    wheelSpeed: 1,
-                    scrollingThreshold: 1000,
-                    wheelPropagation: false,
-                });
-
-                $(window).on('resize', function () {
-                    ps.update();
-                })
-            });
-        </script>
-        <!--===============================================================================================-->
-        <script src="js/main.js"></script>
-        <script src="js/zoomInzoomOut.js"></script>
-        <%-include('../layouts/footer')-%>
+    <style>
+        @media only screen and (min-width: 200px) and (max-width: 767px) {}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--jqury-->
+    <script src="  https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/livingston-css3-mediaqueries-js/1.0.0/css3-mediaqueries.min.js"
+        integrity="sha512-66zwQbFDFSCrjkBZVj/Vgv2XdUxXSJw59UkmjjH/zxftzhDU701lSygYNC/IZ2cz2ZdW0lCVL0+dSKgObGyLgg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <%-include('../layouts/footer')-%>

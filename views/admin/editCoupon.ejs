@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Nest Dashboard</title>
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:image" content="" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="/adminAssets/imgs/theme/favicon.svg" />
+        <!-- Template CSS -->
+        <link href="/adminAssets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+        <!-- Cropper js style -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css" integrity="sha512-bs9fAcCAeaDfA4A+NiShWR886eClUcBtqhipoY5DM60Y1V3BbVQlabthUBal5bq8Z8nnxxiyb1wfGX2n76N1Mw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+        <div class="screen-overlay"></div>
+        <aside class="navbar-aside" id="offcanvas_aside">
+            <div class="aside-top">
+                <a href="#" class="logo">
+                    <img src="/adminAssets\imgs\icons\logo-01.png" alt="IMG-LOGO">
+                </a>
+                <div>
+                    <button class="btn btn-icon btn-aside-minimize"><i class="text-muted material-icons md-menu_open"></i></button>
+                </div>
+            </div>
+            <nav>
+                <ul class="menu-aside">
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/adminDashboard">
+                            <i class="icon material-icons md-home"></i>
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/Products">
+                            <i class="icon material-icons md-shopping_bag"></i>
+                            <span class="text">Products</span>
+                        </a>
+                      
+                    </li>
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/Orders">     
+                            <i class="icon material-icons md-shopping_cart"></i>
+                            <span class="text">Orders</span>
+                        </a>
+                       
+                    </li>
+                    <li class="menu-item active">
+                        <a class=" menu-link" href="/admin/userslist">
+                            <i class="icon material-icons md-people"></i>
+                            <span class="text">users</span>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/categories">
+                            <i class="icon material-icons md-add_box"></i>
+                            <span class="text">Categories</span>
+                        </a>
+                        
+                    </li>
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/adminBanners">
+                            <i class="icon material-icons md-add_box"></i>
+                            <span class="text">Banners</span>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/coupons">
+                            <i class="icon material-icons md-add_box"></i>
+                            <span class="text">Coupons</span>
+                        </a>
+                       
+                    </li>
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/sales">
+                            <i class="icon material-icons md-add_box"></i>
+                            <span class="text">Sales</span>
+                        </a>
+    
+                    </li>
+                    <li class="menu-item active">
+                        <a class="menu-link" href="/admin/adminLogout">
+                            <span class="text">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+                <hr />
+                <br />
+                <br />
+            </nav>
+        </aside>
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+            </div>
+            <div class="col-nav">
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i
+                        class="material-icons md-apps"></i></button>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon" href="#">
+                            <i class="material-icons md-notifications animation-shake"></i>
+                            <span class="badge rounded-pill">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
+                                class="material-icons md-cast"></i></a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
+                            aria-expanded="false"><i class="material-icons md-public"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
+                            <a class="dropdown-item text-brand" href="#"><img src="/adminAssets/imgs/theme/flag-us.png"
+                                    alt="English" />English</a>
+                            <a class="dropdown-item" href="#"><img src="/adminAssets/imgs/theme/flag-fr.png"
+                                    alt="Français" />Français</a>
+                            <a class="dropdown-item" href="#"><img src="/adminAssets/imgs/theme/flag-jp.png"
+                                    alt="Français" />日本語</a>
+                            <a class="dropdown-item" href="#"><img src="/adminAssets/imgs/theme/flag-cn.png"
+                                    alt="Français" />中国人</a>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                            aria-expanded="false"> <img class="img-xs rounded-circle"
+                                src="/adminAssets/imgs/people/avatar-2.png" alt="User" /></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                                Profile</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                                Settings</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                                center</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i
+                                    class="material-icons md-exit_to_app"></i>Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <section class="content-main">
+            <div class="row">
+                <div class="col-9">
+                    <div class="content-header">
+                        <h2 class="content-title">Edit Coupon</h2>
+                        <h4 id="update-message" style="display: none;">Update Succesfully</h4>
+                        <div id="response"></div>
+                        <form method="post"  id="couponEdit"  >
+                            <div>
+                                <button id="couponEditButton" 
+                                    class="btn btn-md rounded font-sm hover-up">Publish</button>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div>
+                                <p id="mssgeBox"></p>
+                            </div>
+                        </div>
+                        <div class="card-body">  
+                            <input type="number" name="currentCode" id="currentId" hidden value="<%= coupon._id %>">    
+                            <div class="mb-4">
+                                <label for="coupon_code" class="form-label">Coupon Code</label>
+                                <input type="number" placeholder="Type here"  name="couponCode"
+                                    class="form-control" id="edit-coupon" value="<%= coupon.couponCode %>" data-val="<%= coupon.couponCode %>"/>
+                                <p id="edit-codeError" style="display: none; color: red;"> Invalid Coupon Code (it must be 6 digits code)</p> 
+                                <p id="edit-existError" style="display: none; color: red;">coupon code is already exist. try another..</p>
+                            </div>
+                            <div>
+                                <label for="discount_percentage" class="form-label">Discount Percentage</label>
+                                <input type="number" placeholder="Discount Percentage" id="edit-discount" name="discountPercentage"
+                                class="form-control" value="<%= coupon.discountPercentage %>" >
+                                <p id="edit-discountError" style="display: none; color: red;">Discount Percentage must be less than 100%</p>
+                            </div>
+                            <div>
+                                <label for="expiry-date" class="form-label">Expires Date</label>
+                                <input type="date" id="edit-date" name="expiresOn" class="form-control" data-val="<%= coupon.expiresOn %>" >
+                                <p id="edit-dateError" style="display: none; color: red;">Choose a Date</p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Coupon description</label>
+                                <textarea type="text" placeholder="Type here" id="edit-description" name="description"
+                                    class="form-control" rows="4" data-val="<%= coupon.description %>" ></textarea>
+                                <p id="edit-descriptionError" style="display:none; color: red;">description is required</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Eligible Price</label>
+                                        <div class="row gx-2">
+                                            <input placeholder="eligible price" type="number" id="edit-eligiblePrice" name="eligiblePrice" class="form-control"
+                                                name="eligiblePrice" value="<%= coupon.eligibleAmount %>"/>
+                                            </div>
+                                            <p id="edit-eligiblePriceError" style="display: none; color: red;">Eligible price must be a positive number</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Maximum Discount Price</label>
+                                        <div class="row gx-2">
+                                            <input placeholder="$" type="number" id="edit-price" name="maximumDiscountAmount" class="form-control"
+                                                name="price" value="<%= coupon.maximumDiscountAmount %>"/>
+                                            </div>
+                                            <p id="edit-priceError" style="display: none; color: red;">Maximum Discount price must be a positive number</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Available Coupon Count</label>
+                                        <div class="row gx-2">
+                                            <input placeholder="Available Coupon Count" type="number" id="edit-quantity" class="form-control"
+                                                name="quantity" value="<%= coupon.quantity %>" />
+                                            <p id="edit-quantityError" style="display: none; color: red;">Available Coupon Count must be a positive number</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+            </div>
+        </section>
+        <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    &copy; Nest - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">All rights reserved</div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="/adminAssets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/adminAssets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/adminAssets/js/vendors/select2.min.js"></script>
+    <script src="/adminAssets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/adminAssets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="/adminAssets/js/main.js?v=1.1" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js" integrity="sha512-Zt7blzhYHCLHjU0c+e4ldn5kGAbwLKTSOTERgqSNyTB50wWSI21z0q6bn/dEIuqf6HiFzKJ6cfj2osRhklb4Og==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/adminAssets/js/coupon.js"></script>
+</body>
+
+</html>

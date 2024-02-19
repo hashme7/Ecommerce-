@@ -66,6 +66,5 @@ let blockAndUnblock = async (email, BlockedOrNot) => {
 }
 $(document).ready(function () {
     "use strict";
-        // Animate loader off screen
         setTimeout(function(){ $('.preloader').fadeOut('slow'); }, 1000);
     });

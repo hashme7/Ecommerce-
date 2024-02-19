@@ -1,104 +1,184 @@
-(function ($) {
-    "use strict";
 
-    /*Sale statistics Chart*/
-    if ($('#myChart').length) {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-            
-            // The data for our dataset
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                        label: 'Sales',
-                        tension: 0.3,
-                        fill: true,
-                        backgroundColor: 'rgba(44, 120, 220, 0.2)',
-                        borderColor: 'rgba(44, 120, 220)',
-                        data: [18, 17, 4, 3, 2, 20, 25, 31, 25, 22, 20, 9]
-                    },
-                    {
-                        label: 'Visitors',
-                        tension: 0.3,
-                        fill: true,
-                        backgroundColor: 'rgba(4, 209, 130, 0.2)',
-                        borderColor: 'rgb(4, 209, 130)',
-                        data: [40, 20, 17, 9, 23, 35, 39, 30, 34, 25, 27, 17]
-                    },
-                    {
-                        label: 'Products',
-                        tension: 0.3,
-                        fill: true,
-                        backgroundColor: 'rgba(380, 200, 230, 0.2)',
-                        borderColor: 'rgb(380, 200, 230)',
-                        data: [30, 10, 27, 19, 33, 15, 19, 20, 24, 15, 37, 6]
-                    }
+let month;
+let chart
+document.addEventListener('DOMContentLoaded', () => {
+    updateChart()
+    let monthButton = document.getElementById('month-button');
+    let yearButton = document.getElementById('year-button');
+    monthButton.addEventListener('click', () => {
+        month = true;
+        updateChart()
+    })
+    yearButton.addEventListener('click', () => {
+        month = false
+        updateChart()
+    })
+});
 
-                ]
+
+/*Sale statistics Chart*/
+async function updateChart() {
+    if (chart) {
+        chart.destroy();
+    }
+    let salesData;
+    let productCount;
+    let labels;
+    const fetchData = await fetch('/admin/dashboardData', {
+        method: 'GET'
+    })
+    const orders = await fetchData.json()
+    if (month) {
+        labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        salesData = orders.monthlySales.map((elem) => parseFloat(elem.total) || 0);
+        productCount = orders.monthlySales.map((elem) => elem.count);
+    } else {
+        labels = orders.yearlySales.map((elem) => elem.year)
+        salesData = orders.yearlySales.map((elem) => parseFloat(elem.total || 0));
+        productCount = orders.yearlySales.map((elem) => elem.count)
+    }
+    var ctx = document.getElementById('salesChart').getContext('2d');
+    document.getElementById('Revenue').innerHTML = orders.totalIncome;
+    document.getElementById('products').innerHTML = orders.productsCount;
+    console.log(orders.totalIncome)
+    chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+        // The data for our dataset
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sales',
+                tension: 0.3,
+                fill: true,
+                backgroundColor: 'lightgreen',
+                borderColor: 'rgba(44, 120, 220)',
+                data: salesData
             },
-            options: {
-                plugins: {
+            {
+                label: 'Products',
+                tension: 0.3,
+                fill: true,
+                backgroundColor: 'rgb(4, 180, 130)',
+                borderColor: 'rgb(4, 209, 130)',
+                data: productCount
+            }
+            ]
+        },
+        options: {
+            plugins: {
                 legend: {
                     labels: {
-                    usePointStyle: true,
+                        usePointStyle: true,
                     },
                 }
-                }
             }
-        });
-    } //End if
+        }
+    });
 
+
+    const paymentStatusCounts = {};
+
+    for (const order of orders.orderList) {
+        const paymentStatus = order.paymentStatus;
+        if (paymentStatusCounts[paymentStatus]) {
+            paymentStatusCounts[paymentStatus]++;
+        } else {
+            paymentStatusCounts[paymentStatus] = 1;
+        }
+    }
+    console.log('*********', paymentStatusCounts)
     /*Sale statistics Chart*/
     if ($('#myChart2').length) {
         var ctx = document.getElementById("myChart2");
         var myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'doughnut',
             data: {
-            labels: ["900", "1200", "1400", "1600"],
-            datasets: [
-                {
-                    label: "US",
-                    backgroundColor: "#5897fb",
-                    barThickness:10,
-                    data: [233,321,783,900]
-                }, 
-                {
-                    label: "Europe",
-                    backgroundColor: "#7bcf86",
-                    barThickness:10,
-                    data: [408,547,675,734]
-                },
-                {
-                    label: "Asian",
-                    backgroundColor: "#ff9076",
-                    barThickness:10,
-                    data: [208,447,575,634]
-                },
-                {
-                    label: "Africa",
-                    backgroundColor: "#d595e5",
-                    barThickness:10,
-                    data: [123,345,122,302]
-                },
-            ]
+                labels: Object.keys(paymentStatusCounts),
+                datasets: [
+                    {
+                        backgroundColor: ["#5897fb", "#7bcf86", "#ff9076"],
+                        data: [paymentStatusCounts.WALLET, paymentStatusCounts.onlinePay, paymentStatusCounts.COD]
+                    }
+                ]
             },
             options: {
                 plugins: {
                     legend: {
                         labels: {
-                        usePointStyle: true,
+                            usePointStyle: true,
                         },
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
                     }
                 }
             }
         });
-    } //end if
-    
-})(jQuery);
+    } //end i
+
+    const ctBestSale = document.getElementById('bestSelling').getContext('2d');
+    const dataOfBestProducts = {
+        labels: orders.bestSellingProducts.map(item => item.product),
+        datasets: [
+            {
+                label: 'Dataset 1',
+                data: orders.bestSellingProducts.map(item => item.sum),
+                backgroundColor: Object.values(Utils.CHART_COLORS),
+            }
+        ]
+    };
+
+    new Chart(ctBestSale, {
+        type: 'pie',
+        data: dataOfBestProducts,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                }
+            }
+        },
+    });
+
+
+    const dataOfBestCategories = {
+        labels: orders.bestSellingCategory.map(item => item._id),
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: orders.bestSellingCategory.map(item => item.category),
+            backgroundColor:Object.values(Utils.CHART_COLORS)
+            }
+        ]
+    }
+    const ctBestCatSale = document.getElementById('bestSellingCategory').getContext('2d');
+    new Chart(ctBestCatSale, {
+        type: 'pie',
+        data: dataOfBestCategories,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                }
+            }
+        },
+    })
+}
+
+const Utils = {
+    CHART_COLORS: {
+        red: 'rgb(255, 99, 132)',
+        orange: 'rgb(255, 159, 64)',
+        yellow: 'rgb(255, 205, 86)',
+        green: 'rgb(75, 192, 192)',
+        blue: 'rgb(54, 162, 235)',
+        purple: 'rgb(153, 102, 255)',
+        grey: 'rgb(201, 203, 207)'
+    }
+};

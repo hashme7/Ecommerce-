@@ -1,97 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>UserList</title>
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="" />
-        <meta property="og:type" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="/adminAssets/imgs/theme/favicon.svg" />
-        <!-- Template CSS -->
-        <link href="/adminAssets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        
-    </head>
 
-    <body>
-        <div class="screen-overlay"></div>
-        <aside class="navbar-aside" id="offcanvas_aside">
-            <div class="aside-top">
-                <a href="#" class="logo">
-                    <img src="/adminAssets\imgs\icons\logo-01.png" alt="IMG-LOGO">
-                </a>
-                <div>
-                    <button class="btn btn-icon btn-aside-minimize"><i class="text-muted material-icons md-menu_open"></i></button>
-                </div>
+<head>
+    <meta charset="utf-8" />
+    <title>UserList</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/adminAssets/imgs/theme/favicon.svg" />
+    <!-- Template CSS -->
+    <link href="/adminAssets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+        integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.5em 1em;
+        margin: 0.5em;
+        background-color: #87e484;
+        color: white;
+        border-radius: 5px;
+        font-size: 10px;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background-color: #0b82f8;
+        color: rgb(66, 61, 61);
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background-color: #446c52;
+        color: white;
+    }
+</style>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="#" class="logo">
+                <img src="/adminAssets\imgs\icons\logo-01.png" alt="IMG-LOGO">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"><i
+                        class="text-muted material-icons md-menu_open"></i></button>
             </div>
-            <nav>
-                <ul class="menu-aside">
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminDashboard">
-                            <i class="icon material-icons md-home"></i>
-                            <span class="text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/Products">
-                            <i class="icon material-icons md-shopping_bag"></i>
-                            <span class="text">Products</span>
-                        </a>
-                      
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/Orders">     
-                            <i class="icon material-icons md-shopping_cart"></i>
-                            <span class="text">Orders</span>
-                        </a>
-                       
-                    </li>
-                    <li class="menu-item active">
-                        <a class=" menu-link" href="/admin/userslist">
-                            <i class="icon material-icons md-people"></i>
-                            <span class="text">users</span>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/categories">
-                            <i class="icon material-icons md-add_box"></i>
-                            <span class="text">Categories</span>
-                        </a>
-                        
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminBanners">
-                            <i class="icon material-icons md-add_box"></i>
-                            <span class="text">Banners</span>
-                        </a>
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminBanners">
-                            <i class="icon material-icons md-add_box"></i>
-                            <span class="text">Coupons</span>
-                        </a>
-                       
-                    </li>
-                    <li class="menu-item active">
-                        <a class="menu-link" href="/admin/adminLogout">
-                            <span class="text">Logout</span>
-                        </a>
-                       
-                    </li>
-                </ul>
-                <hr />
-                <br />
-                <br />
-            </nav>
-        </aside>
-    <div class = "preloader"></div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminDashboard">
+                        <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/Products">
+                        <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/Orders">
+                        <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class=" menu-link" href="/admin/userslist">
+                        <i class="icon material-icons md-people"></i>
+                        <span class="text">users</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/categories">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Categories</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/banners">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Banners</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/coupons">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/sales">
+                        <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Sales</span>
+                    </a>
+
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/adminLogout">
+                        <span class="text">Logout</span>
+                    </a>
+
+                </li>
+            </ul>
+            <hr />
+            <br />
+            <br />
+        </nav>
+    </aside>
+    <div class="preloader"></div>
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
@@ -126,6 +157,10 @@
                         </div>
                     </div>
                 </header>
+
+            </div>
+            <div class="col-lg-4 col-5 me-auto mb-4">
+                <input type="text" id="myInput" placeholder="Search..." class="form-control" />
             </div>
             <!-- card-header end// -->
             <div class="card-body " id="dynamicTable">
@@ -158,12 +193,14 @@
                                     </td>
                                     <td class="text-end">
                                         <% if (userlist[i].isBlocked) {%>
-                                            <button class="badge rounded-pill badge-success"   id="actionBtn" 
+                                            <button class="badge rounded-pill badge-success" id="actionBtn"
                                                 onclick="blockAndUnblock('<%= userlist[i].email %>','<%= userlist[i].isBlocked %>')">
                                                 unBlock
                                             </button>
                                             <%}else{%>
-                                                <button class=" badge rounded-pill alert-warning" style="color: #a85a0b; border: 0px; background-color: #f9ba7a;" id="actionBtn" 
+                                                <button class=" badge rounded-pill alert-warning"
+                                                    style="color: #a85a0b; border: 0px; background-color: #f9ba7a;"
+                                                    id="actionBtn"
                                                     onclick="blockAndUnblock('<%= userlist[i].email %>','<%= userlist[i].isBlocked %>')">
                                                     Block
                                                 </button>
@@ -173,25 +210,9 @@
                                 <%}%>
                         </tbody>
                     </table>
-                    <!-- table-responsive.// -->
-
                 </div>
             </div>
         </section>
-        <!-- content-main end// -->
-        <footer class="main-footer font-xs">
-            <div class="row pb-30 pt-15">
-                <div class="col-sm-6">
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-end">All rights reserved</div>
-                </div>
-            </div>
-        </footer>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/adminAssets/js/vendors/jquery-3.6.0.min.js"></script>
@@ -203,9 +224,33 @@
     <script src="/adminAssets/js/main.js?v=1.1" type="text/javascript"></script>
     <script src="/adminAssets/js/userlist.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tablePagination tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('#tablePagination').DataTable({
+                searching: false,
+                lengthChange: false,
+                pageLength: 5,
+                info:false
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>

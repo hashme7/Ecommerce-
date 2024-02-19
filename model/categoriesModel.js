@@ -1,7 +1,7 @@
     const mongoose = require('mongoose')
 
     const categories = new mongoose.Schema({
-        CatName: {
+        name: {
             type: String,
             required: true
         },
@@ -11,7 +11,7 @@
         },
         isBlocked:{
             type:Boolean,
-            required:false
+            default:false
         }
     })
 

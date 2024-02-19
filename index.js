@@ -12,7 +12,6 @@ app.use(express.static("public"));
   
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 //************ nocache ********* */
 app.use(nocache())
 //********* morgan ********//
@@ -24,6 +23,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+app.set('view engine', 'ejs');
 
 //*******user_routes*******//
 const userRoute = require("./route/userRoute");

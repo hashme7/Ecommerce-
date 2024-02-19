@@ -10,7 +10,8 @@ const productsSchema =new mongoose.Schema({
         required:true
     },
     category:{
-        type:String,
+        type:mongoose.Types.ObjectId,
+        ref:'categories',
         required:true
     },
     images:[{type:String,
@@ -22,10 +23,6 @@ const productsSchema =new mongoose.Schema({
         required:true
     },
     isBlocked:{
-        type:Boolean,
-        default:false
-    },
-    isCategoryBlocked:{
         type:Boolean,
         default:false
     },
