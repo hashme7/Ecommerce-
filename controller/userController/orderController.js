@@ -38,7 +38,9 @@ const placeOrder = async (req, res) => {
     try {
         const userId = req.session.user_id;
         let totalAmount = 0;
-        const { couponId, address, payment ,delivery} = req.body;
+        const { couponId, address, payment ,shippingMethods} = req.body;
+        console.log("Delivery Charge;::::::",shippingMethods)
+        let deliveryCharge = shippingMethods=='express'?300:100;
         let couponAmount = couponId ? await coupons.findOne({ couponCode: couponId }, { maximumDiscountAmount: 1, quantity: 1 }) : null;
         let userData = await User.findOne({ _id: userId }).populate('cart.product').exec();
         const cartProducts = userData?.cart;
@@ -54,6 +56,7 @@ const placeOrder = async (req, res) => {
                 { new: true }
             );
         }
+        totalAmount += deliveryCharge;
         couponAmount ? totalAmount -= couponAmount.maximumDiscountAmount : totalAmount;
         const order = new Orders({
             user: userId,
@@ -63,8 +66,11 @@ const placeOrder = async (req, res) => {
             totalAmount: totalAmount,
             status: 'Pending',
             paymentStatus: payment,
+            deliveryMethod:deliveryCharge==300?'express-delivery':'normal-delivery',
         });
-        couponAmount ? order.couponUsed = couponId : null;
+        let couponUsed = coupons.findOne({couponCode:couponId},{_id:1});
+        console.log("couponId",couponUsed)
+        couponAmount ? order.couponUsed =  couponUsed._id: null;
         if (payment == "COD") {
             if (totalAmount > 1000) {
                 return res.json({ status: 'failed', message: '!COD' })
@@ -212,7 +218,7 @@ const cancellOrder = async (req, res) => {
 }
 const downloadInvoice = async (req, res) => {
     try {
-        const orderDetail = await Orders.findOne({ _id: req.params.orderId });
+        const orderDetail = await Orders.findOne({ _id: req.params.orderId }).populate('products.product').populate('couponUsed');
 
         if (!orderDetail) {
             return res.status(404).json({ error: 'Order not found' });
@@ -221,6 +227,7 @@ const downloadInvoice = async (req, res) => {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         const ejsTemplate = fs.readFileSync('views/user/receipt.ejs', 'utf-8');
+        console.log("orderDetails::::::",orderDetail)
         const htmlContent = ejs.render(ejsTemplate, { orderDetail });
         await page.setContent(htmlContent);
         await page.pdf({ path: `public/invoices/invoice${req.params.orderId}.pdf`, format: 'A4' });

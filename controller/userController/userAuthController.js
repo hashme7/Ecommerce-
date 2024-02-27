@@ -75,7 +75,27 @@ const home = async (req, res) => {
     }
 };
 
+const loadAbout = async(req,res)=>{
+    try{
+        const userName = req.session.user_name;
 
+        res.render('about',{
+            userName
+        })
+    }catch(error){
+        console.log(error)
+    }
+}
+const loadContact = async(req,res)=>{
+    try {
+        const userName = req.session.user_name;
+        res.render('contact',{
+            userName
+        })
+    } catch (error) {
+        
+    }
+}
 //******** signup ********//
 const signup = async (req, res) => {
     try {
@@ -117,12 +137,7 @@ const verifySignup = async (req, res) => {
             `It seems you logging at CoZA store and trying to verify your Email.
                 Here is the verification code.Please enter otp and verify Email`
         );
-        res.render('otpPage',
-            {
-                message: "Enter Otp",
-                user: req.session.user_email
-            }
-        )
+        res.redirect('/otpsignup');
     } catch (error) {
         console.log("error mailserndein")
         console.log(error)
@@ -151,25 +166,32 @@ const verifyOTP = async (req, res) => {
             noTwo,
             noThree,
             noFour
-        } = req.body
+        } = req.query
+        console.log("query", req.query)
         const userID = req.session.user_sign;
         console.log(userID)
         const input = `${noOne}${noTwo}${noThree}${noFour}`;
-        const findOTP = await OTP.find({ user_id: userID }, { otp: 1, _id: 0 }).sort({ _id: -1 }).limit(1);
-        const verifiedOTP = await bcrypt.compare(input, findOTP[0].otp)
-        if (verifiedOTP && findOTP) {
-            await User.updateOne({ _id: userID }, { $set: { isVerified: true } }).catch((err) => {
-                console.log(err, "update-error")
-            })
-            await User.deleteMany({ isVerified: false })
-            res.redirect('/login')
-        } else {
-            res.render("otpPage", { message: "otp is incorrect" })
+        const findOTP = await OTP.find({ user_id: userID }, { otp: 1, _id: 0 }).sort({ _id: -1 }).limit(1); 
+        if (findOTP.length) {
+            const verifiedOTP = await bcrypt.compare(input, findOTP[0].otp)
+            if (verifiedOTP && findOTP) {
+                await User.updateOne({ _id: userID }, { $set: { isVerified: true } }).catch((err) => {
+                    console.log(err, "update-error")
+                })
+                await User.deleteMany({ isVerified: false })
+                res.json({ success: true })
+            } else {
+                res.json({ succes: false })
+            }
+        }else{
+            res.json({ succes: false })
         }
+
     } catch (error) {
         console.log("error on post", error)
     }
 }
+
 const login = async (req, res) => {
     try {
         res.render('login', { message: "enter email and password" })
@@ -225,15 +247,14 @@ const loadEmail = async (req, res) => {
 const resetOTPsend = async (req, res) => {
     try {
         console.log("inside resetPassword")
-        console.log(req.body)
-        let email = req.body.email;
+        console.log(req.query)
+        let email = req.query.email;
         let validuser = await User.findOne({ email: email })
-        console.log(validuser)
-        req.session.user_email = validuser.email;
         if (!validuser) {
-            // console.log("invalid email")
-            res.render('Emailverifcation', { message: "invalid email address" })
+            console.log("invalid email")
+            res.json({success:false})
         } else {
+            req.session.user_email = validuser.email;
             req.session.user_sign = validuser._id;
             await util.mailSender(
                 email,
@@ -241,8 +262,7 @@ const resetOTPsend = async (req, res) => {
                 `It seems you reseting the password and trying to verify your Email.
                 Here is the verification code.Please enter otp and verify Email`
             );
-            // console.log("stage last")
-            res.redirect('/otpVerification')
+            res.json({success:true})
         }
     } catch (error) {
         console.log("error on reset password:", error)
@@ -262,19 +282,26 @@ const resetPassOTP = async (req, res) => {
             noTwo,
             noThree,
             noFour
-        } = req.body
+        } = req.query
         const userID = req.session.user_sign;
         console.log(userID)
         const input = `${noOne}${noTwo}${noThree}${noFour}`;
+        console.log("input    ",input)
         const findOTP = await OTP.find({ user_id: userID }, { otp: 1, _id: 0 }).sort({ _id: -1 }).limit(1);
+        console.log(findOTP)
+        if(!findOTP.length){
+            console.log("no data")
+            return res.json({success:false})
+        }
         const verifiedOTP = await bcrypt.compare(input, findOTP[0].otp)
+        console.log(verifiedOTP);
         if (verifiedOTP && findOTP) {
             await User.updateOne({ _id: userID }, { $set: { isVerified: true } }).catch((err) => {
                 console.log(err, "update-error")
             })
-            res.redirect('/resetpassword')
+            res.json({success:true});
         } else {
-            res.render("otpPagePass", { user: req.session.user_email, message: "Entered OTP is Wrong" })
+            res.json({success:false})
         }
     } catch (error) {
         console.log("error on reset password otp verification", error)
@@ -304,6 +331,8 @@ const verifyResetPassword = async (req, res) => {
 }
 
 
+
+
 module.exports = {
     signup,
     verifySignup,
@@ -318,5 +347,7 @@ module.exports = {
     resetOTPsend,
     loadEmail,
     loadResetPassword,
-    verifyResetPassword
+    verifyResetPassword,
+    loadAbout,
+    loadContact
 }

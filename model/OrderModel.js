@@ -46,12 +46,21 @@ const orderSchema = new mongoose.Schema({
         'Returned'],
         default: 'Pending'
     },
+    deliveryMethod:{
+        type:String,
+        enum:[
+            'express-delivery',
+            'normal-delivery'
+        ],
+        default:'normal-delivery'
+    },
     paymentStatus:{
         type: String,
         required: true,
     },
     couponUsed:{
-        type:Number,
+        type:mongoose.Types.ObjectId,
+        ref:'coupons',
         default:null,
     } 
 })

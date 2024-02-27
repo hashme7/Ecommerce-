@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OTP Verification Form</title>
     <link rel="stylesheet" href="userAssets/css/otpPage.css" />
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css
+" rel="stylesheet">
 </head>
 
 <body>
@@ -17,7 +20,7 @@
         <p>A code has been sent to <span id="email" mail-data="<%= user %>">
                 <%= user %>
             </span></p>
-        <form action="/otpSignup" id="otpForm" method="post">
+        <form id="otpForm">
             <div class="input-field">
                 <input name="noOne" type="number" />
                 <input name="noTwo" type="number" disabled />
@@ -26,12 +29,18 @@
             </div>
             <button type="submit">Verify OTP</button>
         </form>
-        <button id="resendButton">Resend OTP</button>
+        <button type="submit" id="resendButton">Resend OTP</button>
         <div id="countDown"></div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js
+    "></script>
     <script src="userAssets/js/otpPage.js"></script>
     <script>
-        
+
     </script>
 </body>
 

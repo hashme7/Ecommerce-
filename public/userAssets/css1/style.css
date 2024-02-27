@@ -383,5 +383,5 @@ button:active i {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: url('/images/BAxY.gif') no-repeat center center rgba(255, 255, 255, 0.3);
+  background: url('/images/BAxY.gif') no-repeat center center rgba(255, 255, 255, 1.7);
 }

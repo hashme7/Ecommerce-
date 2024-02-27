@@ -1,9 +1,31 @@
-
-
 const inputs = document.querySelectorAll("input"),
   button = document.querySelector("button");
-console.log(inputs)
-// iterate over all inputs
+let OTPForm = document.getElementById('otpForm');
+OTPForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  let dat = $(OTPForm).serialize();
+  try {
+    let isCorrect = await fetch(`/otpsignup?${dat}`, {
+      method: 'POST'
+    });
+    let result = await isCorrect.json();
+    if (result.success) {
+      window.location.href = '/login';
+    } else {
+      button.classList.remove("active");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Entered otp is wrong!",
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+
+})
 inputs.forEach((input, index1) => {
   input.addEventListener("keyup", (e) => {
     const currentInput = input,
@@ -38,12 +60,8 @@ inputs.forEach((input, index1) => {
 
 window.addEventListener("load", () => inputs[0].focus());
 
-
-
-
 //************** countdown ************\\
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("dfkajsk;dlfjkj")
 
   const resendButton = document.getElementById("resendButton");
   const countdownDisplay = document.getElementById("countDown");
@@ -96,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 $(document).ready(function () {
-  $(' .preloader').fadeOut("slow");
+  $('.preloader').fadeOut("slow");
   setTimeout(function () { $('.preloader').fadeOut('slow'); }, 3000);
 });
 

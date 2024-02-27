@@ -1,27 +1,38 @@
 document.addEventListener('DOMContentLoaded', function () {
     let deliveryDiv = document.getElementById('deliveryField');
     let couponDiv = document.getElementById('couponField');
-    let couponInputBtn = document.getElementsByName('couponId')
-    let deliveryInputBtn = document.getElementsByName('shippingMethods')
+    let couponInputBtn = document.getElementsByName('couponId');
+    let deliveryInputBtn = document.getElementsByName('shippingMethods');
     let totalAmount = document.getElementById('total1');
+    updateTotal();
+
     deliveryInputBtn.forEach((btn) => {
         btn.addEventListener('click', () => {
             updateTotal();
-        })
-    })
+        });
+    });
+
     couponInputBtn.forEach((btn) => {
         btn.addEventListener('change', () => {
             updateTotal();
-        })
-    })
+        });
+    });
+
     function updateTotal() {
         let deliveryInput = deliveryDiv.querySelector('input:checked');
-        let coupnAmount = 0;
         let couponInput = couponDiv.querySelector('input:checked');
-        coupnAmount = parseFloat(couponInput.getAttribute('data-val'))
-        totalAmount.innerHTML = (parseFloat(totalAmount.getAttribute('data-total')) + parseFloat(deliveryInput.getAttribute('data-charge'))) - coupnAmount;
+        let couponUsed = document.getElementById('couponAmount');
+        console.log("checked:",deliveryInput)
+        let deliveryCharge = deliveryInput ? parseFloat(deliveryInput.getAttribute('data-charge')) : 0;
+        let couponAmount = couponInput ? parseFloat(couponInput.getAttribute('data-val')) : 0;
+        
+        let subTotal = parseFloat(totalAmount.getAttribute('data-total'));
+        let newTotal = subTotal + deliveryCharge - couponAmount;
+        couponUsed.innerHTML = couponAmount;
+        totalAmount.innerHTML = `<i class="fa-solid fa-indian-rupee-sign"></i> ${newTotal.toFixed(2)}`;
     }
 });
+
 
 
 form.addEventListener('submit', async (event) => {

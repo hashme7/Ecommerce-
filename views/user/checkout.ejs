@@ -211,50 +211,6 @@
         <div class="checkout">
             <form id="form">
                 <div class="container">
-                    <% if (couponData.length>0){%>
-                        <div id="reloadArea2">
-                            <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <div class="btn btn-outline-primary-2 btn-order" id="btn-coupon" data-toggle="collapse"
-                                    data-target="#couponCollapse">
-                                    <a href=""></a> Apply coupon
-                                </div>
-                            </div>
-                        </div>
-                        <div id="couponCollapse" class="collapse" style="justify-content: flex-start;">
-                            <div class="row" id="couponField">
-                                <% couponData.forEach(function(coupons, index) { %>
-                                    <div class="col-lg-2" style="width: 100%;">
-                                        <div class="card card-dashboard" style="width: 60%;">
-                                            <div class="card-body">
-                                                <input type="text" hidden name="" id="coupon"
-                                                    value="<%= coupons.maximumDiscountAmount %>">
-                                                <input type="radio" id="couponId" name="couponId"
-                                                    data-val="<%= coupons.maximumDiscountAmount %>"
-                                                    value="<%= coupons.couponCode%>">
-                                                <h3 class="card-title">
-                                                    <%= coupons.description %>
-                                                </h3>
-                                                <p>Coupon code: <%= coupons.couponCode %><br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% }); %>
-                            </div>
-                        </div>
-                        <%}else{%>
-                            <div id="reloadArea2">
-                                <div class="flex-w flex-m m-r-20 m-tb-5">
-                                    <div class="btn btn-outline-primary-2 btn-order" id="btn-coupon"
-                                        data-toggle="collapse" data-target="#couponCollapse">
-                                        <a href=""></a> Apply coupon
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: flex;">
-                                <p id="couponCollapse" class="collapse" style="left: 0px;">no coupons</p>
-                            </div>
-
-                            <%}%>
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <div class="row" id="address-select">
@@ -296,6 +252,37 @@
                                             data-target="#tab-addAddress" id="addAddressButton">
                                             Add Adresses
                                         </div>
+                                        <% if(couponData.length>0){%>
+                                            <div id="reloadArea2">
+                                                <div class="flex-w flex-m m-r-20 m-tb-5">
+                                                    <div class="btn btn-outline-primary-2 btn-order" id="btn-coupon" data-toggle="collapse"
+                                                        data-target="#couponCollapse">
+                                                        <a href=""></a> Apply coupon
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <div id="couponCollapse" class="collapse" style="justify-content: flex-start;">
+                                                    <div class="row" id="couponField">
+                                                        <% couponData.forEach(function(coupons, index) { %>
+                                                            <div class="col-lg-2" style="width: 100%;">
+                                                                <div class="card card-dashboard" style="width: 60%;">
+                                                                    <div class="card-body">
+                                                                        <input type="text" hidden name="" id="coupon"
+                                                                            value="<%= coupons.maximumDiscountAmount %>">
+                                                                        <input type="radio" id="couponId" name="couponId"
+                                                                            data-val="<%= coupons.maximumDiscountAmount %>"
+                                                                            value="<%= coupons.couponCode%>">
+                                                                        <h3 class="card-title">
+                                                                            <%= coupons.description %>
+                                                                        </h3>
+                                                                        <p>Coupon code: <%= coupons.couponCode %><br>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <% }); %>
+                                                    </div>
+                                                </div>
+                                            <%}%>
                                         <div class="tab-pane fade" id="tab-addAddress" role="tabpanel"
                                             aria-labelledby="tab-addAddress-link">
                                             <h3>Add Address</h3>
@@ -364,7 +351,6 @@
                                                     <i class="icon-long-arrow-right"></i>
                                                 </button>
                                             </form>
-
                                         </div><!-- Add address form end -->
 
                                     </div>

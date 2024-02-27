@@ -12,14 +12,15 @@
     <!-- STYLE CSS -->
     <link rel="stylesheet" href="userAssets/css1/style.css">
 </head>
+
 <body>
-    <div class = "preloader"></div>
+    <div class="preloader"></div>
     <div class="wrapper" style="background-image: url('images1/bg-registration-form-1.jpg');">
         <div class="inner">
             <div class="image-holder">
                 <img src="images1/registration-form-1.jpg" alt="">
             </div>
-            <form action="/emailVerify" method="post" onsubmit="validationOnform(event)">
+            <form id="verifyEmail">
                 <h3 class="register-head">Reset password</h3>
                 <div class="form-wrapper">
                     <p class="messageP">
@@ -32,17 +33,69 @@
                 </div>
                 <p id="emailError">Invalid email</p>
                 <div class="d-flex justify-content-center">
-                    <button  type="submit" class="badge rounded-pill alert-dark" id="sendbtn" style="height: 40px;">
+                    <button type="submit" class="badge rounded-pill alert-dark" id="sendbtn" style="height: 40px;">
                         Send
                         <i class="zmdi zmdi-arrow-right arrowButton"></i>
                     </button>
                 </div>
             </form>
-            
+
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="userAssets/js/resetpassword.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
-    <%-include('../layouts/footer') -%> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script>
+        let form = document.getElementById('verifyEmail');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                if (!validationOnform(email)) {
+                    return
+                }
+                $('.preloader').fadeIn("slow");
+                let data = $(form).serialize();
+                console.log("serialized data", data);
+                let result = await fetch(`/emailVerify?${data}`, {
+                    method: "POST"
+                })
+                let isVerified = await result.json();
+                console.log(isVerified)
+                if (isVerified.success) {
+                    window.location.href = '/otpVerification'
+                } else {
+                     $('.preloader').fadeOut('slow'); 
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "The provided email is not registered. Please sign up.",
+                    });
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
+        function validationOnform(event) {
+            let email = $('#email').val();
+            let valid = emailValidation(email);
+            console.log("email:", email)
+            if (!valid || email == "") {
+                $('#emailError').css('display', 'block')
+                return false
+            } else {
+                $('#emailError').css('display', 'none')
+                return true;
+            }
+        }
+
+        // **************** emailValidation **************\\
+        function emailValidation(email) {
+            let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!regex.test(email)) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <%-include('../layouts/footer') -%>

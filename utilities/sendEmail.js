@@ -33,6 +33,7 @@ let mailSender = async (email,id,htmlContent) => {
           email: email,
           otp: hashedOTP,
       });
+      console.log("otp",otp)
       await newOtp.save();
       console.log("Email sent successfully");
   } catch (error) {

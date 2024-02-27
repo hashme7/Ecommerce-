@@ -735,8 +735,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                         <tr>
                             <td class="w-full align-top">
                                 <div>
-                                    <img src="https://raw.githubusercontent.com/templid/email-templates/main/templid-dynamic-templates/invoice-02/brand-sample.png"
-                                        class="h-12" />
+                                    <img src="images/icons/logo-01.png" class="h-12" />
                                 </div>
                             </td>
 
@@ -749,7 +748,8 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                                                     <div>
                                                         <p class="whitespace-nowrap text-slate-400 text-right">Date</p>
                                                         <p class="whitespace-nowrap font-bold text-main text-right">
-                                                            <%= orderDetail.orderedDate.toLocaleDateString() %></p>
+                                                            <%= orderDetail.orderedDate.toLocaleDateString() %>
+                                                        </p>
                                                     </div>
                                                 </td>
                                                 <td class="pl-4">
@@ -776,7 +776,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                         <tr>
                             <td class="w-1/2 align-top">
                                 <div class="text-sm text-neutral-600">
-                                    <p class="font-bold">Supplier Company INC</p>
+                                    <p class="font-bold">COZAZ INC</p>
                                     <p>Number: 9544884488</p>
                                     <p>VAT: 23456789</p>
                                     <p>6622 Abshire Mills</p>
@@ -786,12 +786,22 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                             </td>
                             <td class="w-1/2 align-top text-right">
                                 <div class="text-sm text-neutral-600">
-                                    <p class="font-bold">Ship To<br><%= orderDetail.address[0].name %></p>
-                                    <p>Number: <%= orderDetail.address[0].mobile %></p>
+                                    <p class="font-bold">Ship To<br>
+                                        <%= orderDetail.address[0].name %>
+                                    </p>
+                                    <p>Number: <%= orderDetail.address[0].mobile %>
+                                    </p>
                                     <p>VAT: 23456789</p>
-                                    <p><%= orderDetail.address[0].pincode %> ,<%= orderDetail.address[0].city %></p>
-                                    <p><%= orderDetail.address[0].colony %>  <%=orderDetail.address[0].pincode %></p>
-                                    <p><%= orderDetail.address[0].state %></p>
+                                    <p>
+                                        <%= orderDetail.address[0].pincode %> ,<%= orderDetail.address[0].city %>
+                                    </p>
+                                    <p>
+                                        <%= orderDetail.address[0].colony %>
+                                            <%=orderDetail.address[0].pincode %>
+                                    </p>
+                                    <p>
+                                        <%= orderDetail.address[0].state %>
+                                    </p>
                                 </div>
                             </td>
                         </tr>
@@ -803,87 +813,88 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                 <table class="w-full border-collapse border-spacing-0">
                     <thead>
                         <tr>
-                            <td class="border-b-2 border-main pb-3 pl-3 font-bold text-main">#</td>
-                            <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Product details</td>
-                            <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Price</td>
-                            <td class="border-b-2 border-main pb-3 pl-2 text-center font-bold text-main">Qty.</td>
-                            <td class="border-b-2 border-main pb-3 pl-2 text-center font-bold text-main">VAT</td>
-                            <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Subtotal</td>
-                            <td class="border-b-2 border-main pb-3 pl-2 pr-3 text-right font-bold text-main">Subtotal +
-                                VAT</td>
+                            <th class="border-b-2 border-main pb-3 pl-3 font-bold text-main">#</th>
+                            <th class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Product details</th>
+                            <th class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Price</th>
+                            <th class="border-b-2 border-main pb-3 pl-2 text-center font-bold text-main">Qty.</th>
+                            <th class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="border-b py-3 pl-3">1.</td>
-                            <td class="border-b py-3 pl-2">Montly accountinc services</td>
-                            <td class="border-b py-3 pl-2 text-right">$150.00</td>
-                            <td class="border-b py-3 pl-2 text-center">1</td>
-                            <td class="border-b py-3 pl-2 text-center">20%</td>
-                            <td class="border-b py-3 pl-2 text-right">$150.00</td>
-                            <td class="border-b py-3 pl-2 pr-3 text-right">$180.00</td>
+                            <td colspan="5">
+                                <table class="w-full border-collapse border-spacing-0">
+                                    <tbody>
+                                        <% orderDetail.products.forEach((product,index)=>{%>
+                                            <tr>
+                                                <td>
+                                                    <%= index+1 %>
+                                                </td>
+                                                <td class="text-center">
+                                                    <%= product.product.productName %>
+                                                </td>
+                                                <td class="text-center">
+                                                    <%= product.product.price %>
+                                                </td>
+                                                <td class="text-center">
+                                                    <%= product.quantity %>
+                                                </td>
+                                                <td class="text-right">
+                                                    <%= product.product.price * product.quantity %>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="border-b py-3 pl-3">2.</td>
-                            <td class="border-b py-3 pl-2">Taxation consulting (hour)</td>
-                            <td class="border-b py-3 pl-2 text-right">$60.00</td>
-                            <td class="border-b py-3 pl-2 text-center">2</td>
-                            <td class="border-b py-3 pl-2 text-center">20%</td>
-                            <td class="border-b py-3 pl-2 text-right">$120.00</td>
-                            <td class="border-b py-3 pl-2 pr-3 text-right">$144.00</td>
-                        </tr>
-                        <tr>
-                            <td class="border-b py-3 pl-3">3.</td>
-                            <td class="border-b py-3 pl-2">Bookkeeping services</td>
-                            <td class="border-b py-3 pl-2 text-right">$50.00</td>
-                            <td class="border-b py-3 pl-2 text-center">1</td>
-                            <td class="border-b py-3 pl-2 text-center">20%</td>
-                            <td class="border-b py-3 pl-2 text-right">$50.00</td>
-                            <td class="border-b py-3 pl-2 pr-3 text-right">$60.00</td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">
+                            <td colspan="5">
                                 <table class="w-full border-collapse border-spacing-0">
                                     <tbody>
                                         <tr>
-                                            <td class="w-full"></td>
-                                            <td>
-                                                <table class="w-full border-collapse border-spacing-0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="border-b p-3">
-                                                                <div class="whitespace-nowrap text-slate-400">Net total:
-                                                                </div>
-                                                            </td>
-                                                            <td class="border-b p-3 text-right">
-                                                                <div class="whitespace-nowrap font-bold text-main">
-                                                                    $320.00</div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="p-3">
-                                                                <div class="whitespace-nowrap text-slate-400">VAT total:
-                                                                </div>
-                                                            </td>
-                                                            <td class="p-3 text-right">
-                                                                <div class="whitespace-nowrap font-bold text-main">
-                                                                    $64.00</div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="bg-main p-3">
-                                                                <div class="whitespace-nowrap font-bold text-white">
-                                                                    Total:</div>
-                                                            </td>
-                                                            <td class="bg-main p-3 text-right">
-                                                                <div class="whitespace-nowrap font-bold text-white">
-                                                                    $384.00</div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <td class="border-b p-3">
+                                                <div class="whitespace-nowrap text-slate-400">Net total:</div>
+                                            </td>
+                                            <td class="border-b p-3 text-right">
+                                                <div class="whitespace-nowrap font-bold text-main">
+                                                    <%=orderDetail.totalAmount%>
+                                                </div>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="border-b p-3">
+                                                <div class="whitespace-nowrap text-slate-400">Delivery Charge:</div>
+                                            </td>
+                                            <td class="border-b p-3 text-right">
+                                                <div class="whitespace-nowrap font-bold text-main">
+                                                    <span>(<%= orderDetail.deliveryMethod %>)</span>
+                                                    <%=orderDetail.deliveryMethod=="express-delivery"?300:100; %>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% if(orderDetail.couponUsed){%>
+                                            <tr>
+                                                <td class="border-b p-3">
+                                                    <div class="whitespace-nowrap text-slate-400">Coupon Amount:</div>
+                                                </td>
+                                                <td class="border-b p-3 text-right">
+                                                    <div class="whitespace-nowrap font-bold text-main">
+                                                        <%=orderDetail.couponUsed.maximumDiscountAmount %>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                                <tr>
+                                                    <td class="bg-main p-3">
+                                                        <div class="whitespace-nowrap font-bold text-white">Total:</div>
+                                                    </td>
+                                                    <td class="bg-main p-3 text-right">
+                                                        <div class="whitespace-nowrap font-bold text-white">
+                                                            <%=orderDetail.totalAmount %>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                     </tbody>
                                 </table>
                             </td>

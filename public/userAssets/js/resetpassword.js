@@ -13,8 +13,6 @@ function validationOnform(event) {
     }
 }
 
-
-
 // **************** emailValidation **************\\
 function emailValidation(email) {
     let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -23,7 +21,7 @@ function emailValidation(email) {
     }
     return true;
 }
-
+let sendBtn = document.getElementById('sendbtn')
 
 $(document).ready(function () {
     // Animate loader off screen

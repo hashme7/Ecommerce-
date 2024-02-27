@@ -9,25 +9,30 @@ const shopController = require('../controller/userController/shopController.js')
 const walletController = require('../controller/userController/walletController.js')
 userRoute.set("view engine", "ejs");
 userRoute.set("views", "./views/user");
-
+// -------------------Authentication of User ------------\\
 userRoute.get("/", userAuthController.home);
 userRoute.get('/home', userAuthController.home)
+userRoute.get('/aboutUs',userAuthController.loadAbout)
+userRoute.get('/contactUS',userAuthController.loadContact)
 userRoute.get("/signup", auth.isLogOut, userAuthController.signup);
 userRoute.post("/signup", userAuthController.verifySignup)
 userRoute.get("/otpsignup", auth.isLogOut, userAuthController.otp)
 userRoute.post('/otpsignup', userAuthController.verifyOTP)
+userRoute.get('/login', auth.isLogOut, userAuthController.login)
+userRoute.post('/login', userAuthController.verifyLogin)
+                // ---------------------\\
+userRoute.get('/emailVerify', userAuthController.loadEmail)
+userRoute.post('/emailVerify', userAuthController.resetOTPsend)
 userRoute.get('/otpVerification', userAuthController.loadResetPOTP)
 userRoute.post('/otpVerification', userAuthController.resetPassOTP)
 userRoute.get('/resetPassword', userAuthController.loadResetPassword)
 userRoute.post('/resetPassword', userAuthController.verifyResetPassword)
-userRoute.get('/login', auth.isLogOut, userAuthController.login)
-userRoute.post('/login', userAuthController.verifyLogin)
-userRoute.get('/emailVerify', userAuthController.loadEmail)
-userRoute.post('/emailVerify', userAuthController.resetOTPsend)
+userRoute.get('/logout', userAuthController.logout)
+// -------------------------Shop Routes ------------------\\
 userRoute.get('/shop', auth.isBlocked, shopController.loadShop)
 userRoute.post('/shop', auth.isBlocked, shopController.loadShop)
 userRoute.get('/productlist', auth.isBlocked, shopController.singleProductList)
-userRoute.get('/logout', userAuthController.logout)
+// ---------------------------Profile Routes ---------------\\
 userRoute.get('/profile', auth.isBlocked, auth.isLogIn, profileController.profile)
 userRoute.get('/editProfile', auth.isBlocked, auth.isLogIn, profileController.loadEditProfile)
 userRoute.patch('/editProfile', auth.isLogIn, profileController.editProfile)
@@ -35,6 +40,7 @@ userRoute.patch('/addAddress', auth.isLogIn, profileController.addAddress)
 userRoute.patch('/deleteAddress/:address', auth.isLogIn, profileController.deleteAddress)
 userRoute.get('/editAddress', auth.isLogIn, profileController.loadeditAddress)
 userRoute.patch('/editAddress/:addressId', auth.isLogIn, profileController.editAddres)
+// --------------------------- Order Routes ---------------------\\
 userRoute.get('/cart', auth.isBlocked, auth.isLogIn, cartController.loadCart)
 userRoute.post('/addToCart/:product_id', cartController.addToCart)
 userRoute.patch('/removeFrmCart/:product_id', cartController.removeFrmCart)
@@ -48,5 +54,7 @@ userRoute.patch('/cancelOrder', auth.isLogIn, orderController.cancellOrder)
 userRoute.post('/verifyPayment', auth.isLogIn, orderController.verifyPayment)
 userRoute.post('/createOrder', auth.isLogIn, walletController.createOrder)
 userRoute.post('/verifyWalletPayment/:amount/:type', auth.isLogIn, walletController.verifyPaymentOrder)
+// --------
+
 
 module.exports = userRoute;
