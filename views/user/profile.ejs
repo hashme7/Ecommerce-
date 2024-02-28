@@ -41,11 +41,6 @@
                                                     aria-selected="false">Adresses</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link " id="tab-dashboard-link" data-toggle="tab"
-                                                    href="#tab-dashboard" role="tab" aria-controls="tab-dashboard"
-                                                    aria-selected="false">Coupon</a>
-                                            </li>
-                                            <li class="nav-item">
                                                 <a class="nav-link" href="/logout" id="signOutLink">Sign Out</a>
                                             </li>
                                         </ul>
@@ -128,16 +123,23 @@
                                             <div class="tab-pane fade" id="tab-wallet" role="tabpanel"
                                                 aria-labelledby="tab-wallet-link">
                                                 <div id="walletArea">
-                                                    <h2>Your Wallet</h2>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <h2>Your Wallet</h2>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <button class="btn btn-primary" data-toggle="modal"
+                                                                    data-target="#addMoneyModal">Add
+                                                                    Money</button>
+                                                        </div>
+                                                    </div>
                                                     <div class="wallet-balance">
                                                         <p>Your wallet balance: <%= userData.wallet.balance %> Rs</p>
-                                                        <button class="btn btn-primary" data-toggle="modal"
-                                                            data-target="#addMoneyModal">Add
-                                                            Money</button>
+                                                        
                                                     </div>
                                                     <div class="transaction-history" style="padding-top: 2%;">
                                                         <h3>Transaction History</h3>
-                                                        <table class="table">
+                                                        <table class="table" id="transcationTable">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Date</th>
@@ -188,18 +190,21 @@
                                                         <div class="modal-body" style="padding: 20px;">
                                                             <!-- Add your form elements for adding money here -->
                                                             <form id="addMoneyForm">
-                                                                <div class="form-group">
-                                                                    <label for="amount">Amount:</label>
-                                                                    <input type="number"
-                                                                        class="form-control form-control-sm" id="amount"
-                                                                        name="amount" min="0" required>
+                                                                <div class="row">
+                                                                    <div class="form-group col-lg-6">
+                                                                        <label for="amount">Amount:</label>
+                                                                        <input type="number"
+                                                                            class="form-control form-control-sm"
+                                                                            id="amount" name="amount" min="0" required>
+                                                                    </div>
+                                                                    <!-- Add more form elements if needed -->
+                                                                    <div class="text-center col-lg-6">
+                                                                        <button type="submit" id="addMoneyBtn"
+                                                                            class="btn btn-primary">Add
+                                                                            Money</button>
+                                                                    </div>
                                                                 </div>
-                                                                <!-- Add more form elements if needed -->
-                                                                <div class="text-center">
-                                                                    <button type="submit" id="addMoneyBtn"
-                                                                        class="btn btn-primary">Add
-                                                                        Money</button>
-                                                                </div>
+
                                                             </form>
                                                         </div>
                                                     </div>
@@ -301,7 +306,6 @@
     </div>
 
     </div><!-- End .page-wrapper -->
-
 
     <!-- Add Address Modal -->
     <div class="modal fade" id="addAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -411,14 +415,19 @@
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#orderTable').DataTable({
-                searching: false,
-                lengthChange: false,
-                pageLength: 5,
-                info: false
-            });
+        $('#orderTable').DataTable({
+            searching: false,
+            lengthChange: false,
+            pageLength: 3,
+            info: false
+        });
+        $('#transcationTable').DataTable({
+            searching: false,
+            lengthChange: false,
+            pageLength: 5,
+            info: false
         });
     </script>
     <%- include('../layouts/footer.ejs') -%>

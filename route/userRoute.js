@@ -54,6 +54,8 @@ userRoute.patch('/cancelOrder', auth.isLogIn, orderController.cancellOrder)
 userRoute.post('/verifyPayment', auth.isLogIn, orderController.verifyPayment)
 userRoute.post('/createOrder', auth.isLogIn, walletController.createOrder)
 userRoute.post('/verifyWalletPayment/:amount/:type', auth.isLogIn, walletController.verifyPaymentOrder)
+userRoute.patch('/returnproduct/:orderId/:productId', auth.isLogIn, orderController.returnProduct);
+
 // --------
 
 

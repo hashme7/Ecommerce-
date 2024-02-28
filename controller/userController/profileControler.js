@@ -58,7 +58,6 @@ const editProfile = async (req, res) => {
 const addAddress = async (req, res) => {
     try {
         const { name, mobile, colony, state, city, pincode, house } = req.body;
-        console.log(name, mobile, colony, state, city, pincode, house)
         const newAddress = await User.updateOne({ _id: req.session.user_id }, {
             $push: {
                 address: {
@@ -133,13 +132,7 @@ const editAddres = async (req, res) => {
         res.json({ message: "Error on editAddress" });
     }
 };
-const addWallet = (req,res)=>{
-    try {
-        
-    } catch (error) {
-        
-    }
-}
+
 module.exports = {
     profile,
     loadEditProfile,
@@ -147,6 +140,5 @@ module.exports = {
     addAddress,
     deleteAddress,
     loadeditAddress,
-    editAddres,
-    addWallet 
+    editAddres
 }

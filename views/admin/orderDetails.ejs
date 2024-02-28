@@ -103,7 +103,7 @@
         </nav>
     </aside>
     <div class="preloader"></div>
-    <main class="main-wrap" >
+    <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
                 <form class="searchform">
@@ -125,16 +125,16 @@
                 </ul>
             </div>
         </header>
-        <section class="content-main" >
+        <section class="content-main">
             <div class="content-header">
                 <div>
                     <h2 class="content-title card-title">Order detail</h2>
                     <p>Details for Order ID: 3453012</p>
                 </div>
             </div>
-            <div class="card" >
+            <div class="card">
                 <header class="card-header">
-                    <div class="row align-items-center" >
+                    <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
                             <span> <i class="material-icons md-calendar_today"></i> <b>
                                     <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' ,
@@ -142,42 +142,6 @@
                                 </b>
                             </span> <br />
                             <small class="text-muted">Order ID: 3453012</small>
-                        </div>
-                        <div class="col-lg-6 col-md-6 ms-auto text-md-end">
-                            <% if(orders.status=='Delivered' ||orders.status=='Cancelled' ){%>
-                                <select class="form-select d-inline-block mb-lg-0 mr-5 mw-200" id="selectStatus"
-                                    disabled>
-                                    <option value="Delivered" <% if (orders.status=='Delivered' ) { %> selected <% } %>
-                                            >delivered</option>
-                                    <option value="Cancelled" <% if (orders.status=='Cancelled' ) { %> selected <% } %>
-                                            >Cancelled</option>
-                                </select>
-                                <%}else{%>
-                                    <select class="form-select d-inline-block mb-lg-0 mr-5 mw-200" id="selectStatus"
-                                        onchange="status('<%=orders._id%>')">
-                                        <option value="Placed" <% if (orders.status=='placed' ) { %> selected <% } %>
-                                                >placed</option>
-                                        <option value="Out For Delivery" <% if (orders.status=='Out For Delivery' ) { %>
-                                            selected <% } %>>out for delivery</option>
-                                        <option value="Shipped" <% if (orders.status=='shipped' ) { %> selected <% } %>
-                                                >shipped</option>
-                                        <option value="Delivered" <% if (orders.status=='Delivered' ) { %> selected <% }
-                                                %>
-                                                >delivered</option>
-                                        <option value="Cancelled" <% if (orders.status=='Cancelled' ) { %> selected <% }
-                                                %>
-                                                >Cancelled</option>
-                                        <option value="Return Requested" <% if (orders.status=='Return Requested' ) { %>
-                                            selected <% } %>
-                                                >Return Requested</option>
-                                        <option value="Returned" <% if (orders.status=='Returned' ) { %>
-                                            selected <% } %>
-                                                >Return Requested</option>
-                                    </select>
-                                    <%}%>
-                                        <a class="btn btn-primary" href="#">Save</a>
-                                        <a class="btn btn-secondary print ms-2" href="#"><i
-                                                class="icon material-icons md-print"></i></a>
                         </div>
                     </div>
                 </header>
@@ -237,16 +201,18 @@
                         <!-- col// -->
                     </div>
                     <!-- row // -->
-                    <div class="row">
+                    <div class="row" id="reloadDiv">
                         <div class="col-lg-12">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th width="40%">Product</th>
-                                            <th width="20%">Unit Price</th>
-                                            <th width="20%">Quantity</th>
-                                            <th width="20%" class="text-end">Total</th>
+                                            <th width="30%">Product</th>
+                                            <th width="10%">Unit Price</th>
+                                            <th width="10%">Quantity</th>
+                                            <th width="10%">Status</th>
+                                            <th width="20%">Total</th>
+                                            <th width="20%" class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -271,20 +237,52 @@
                                                     <td>
                                                         <%= orders.products[i].quantity %>
                                                     </td>
-                                                    <td class="text-end">
-                                                        <%= productTotal=orders.products[i].product.price *
-                                                            orders.products[i].quantity%>
+                                                    <td>
+                                                        <%= orders.products[i].status %>
+                                                    </td>
+                                                    <td>
+                                                        <%= productTotal=orders.products[i].product.price *orders.products[i].quantity%>
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-md-end">
+                                                            <% if (orders.products[i].status==='Delivered' ||orders.products[i].status==='Cancelled' ) { %>
+                                                                <select
+                                                                    class="form-select d-inline-block mb-lg-0 mr-5 mw-200"
+                                                                    id="selectStatus" disabled>
+                                                                    <option value="Delivered"
+                                                                        <%=orders.products[i].status==='Delivered' ? 'selected' : '' %>>Delivered</option>
+                                                                    <option value="Cancelled"
+                                                                        <%=orders.products[i].status==='Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                                                </select>
+                                                                <%}else if(orders.products[i].status==='Return Requested'){ %>
+                                                                    <button class="btn btn-dark"
+                                                                        onclick="returnAction('<%= orders.products[i].reason %>','<%= orders.products[i].product._id %>','<%= orders._id %>')">show
+                                                                        Reason</button>
+                                                                    <% } else { %>
+                                                                        <select
+                                                                            class="form-select d-inline-block mb-lg-0 mr-5 mw-200"
+                                                                            id="selectStatus"
+                                                                            onchange="updateStatus('<%= orders._id %>','<%= orders.products[i].product._id %>')">
+                                                                            <% const statusOptions=['Placed', 'Shipped', 'Delivered' , 'Cancelled' ,'Out For Delivery','Returned']; %>
+                                                                                <% statusOptions.forEach(option=> { %>
+                                                                                    <option value="<%= option %>"
+                                                                                        <%=orders.products[i].status===option ? 'selected' : '' %>><%= option %>
+                                                                                    </option>
+                                                                                    <% }); %>
+                                                                        </select>
+                                                                        <% } %>
+                                                        </div>
+
                                                     </td>
                                                 </tr>
                                                 <% SubTotalPrice=SubTotalPrice + productTotal %>
                                                     <%}%>
 
                                                         <tr>
-                                                            <td colspan="4">
+                                                            <td colspan="6">
                                                                 <article class="float-end">
                                                                     <dl class="dlist">
                                                                         <dt>Subtotal:</dt>
-
                                                                         <dd>
                                                                             <%=SubTotalPrice%>
                                                                         </dd>
@@ -304,7 +302,7 @@
                                                                         <dd>
                                                                             <span
                                                                                 class="badge rounded-pill alert-success text-success">Pending
-                                                                                </span>
+                                                                            </span>
                                                                         </dd>
                                                                     </dl>
                                                                 </article>
@@ -320,19 +318,69 @@
             </div>
         </section>
         <script>
-            const status = async (orderId) => {
+            const updateStatus = async (orderId, productId) => {
                 const selectStatus = document.getElementById('selectStatus').value;
-                const response = await fetch(`/admin/status?id=${orderId}&&status=${selectStatus}`, {
+                const response = await fetch(`/admin/status?id=${orderId}&status=${selectStatus}&productId=${productId}`, {
                     method: "PATCH",
                 });
-
                 if (response.ok) {
                     const jsonRes = await response.json();
                     if (jsonRes.status === 'success') {
-                       location.reload(true)
+                        location.reload(true)
                     }
                 } else {
                     console.error('Request failed ', response.status);
+                }
+            }
+            const returnAction = async (reason,productId,orderId) => {
+                try {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: "btn btn-success",
+                            cancelButton: "btn btn-danger"
+                        },
+                        buttonsStyling: false
+                    });
+                    swalWithBootstrapButtons.fire({
+                        title: "Return Request",
+                        text: `Reason:${reason}`,
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Accept!",
+                        cancelButtonText: "Reject!",
+                        reverseButtons: true
+                    }).then(async(result) => {
+                        if (result.isConfirmed) {
+                            let accepted = await fetch(`/admin/returnRequestAccept?orderId=${orderId}&productId=${productId}`,{
+                                method:'PATCH'
+                            });
+                            console.log(accepted)
+                            let acceptedjson = await accepted.json();
+                            if(accepted.success){
+                                swalWithBootstrapButtons.fire({
+                                    title: "Accepted!",
+                                    text: "return request is accepted :)",
+                                    icon: "success"
+                                });
+                            }
+                            location.reload(true)
+                        } else if (
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            
+                            let rejected =await fetch(`/admin/returnRequestReject?orderId=${orderId}&productId=${productId}`,{
+                                method:'PATCH'
+                            })
+                            swalWithBootstrapButtons.fire({
+                                title: "Rejected!",
+                                text: "Return request is rejected :)",
+                                icon: "error"
+                            });
+                            location.reload(true)
+                        }
+                    });
+                } catch (error) {
+                    console.log('error on ', error)
                 }
             }
         </script>

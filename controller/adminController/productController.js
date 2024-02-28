@@ -5,7 +5,7 @@ const categories = require('../../model/categoriesModel')
 const loadproduct = async (req, res) => {
     try {
         const products = await product.find({})
-            .populate('category').exec();
+            .populate('category').sort({_id:-1}).exec();
         console.log("product with populated category", products)
         res.render('products', { products })
     } catch (error) {

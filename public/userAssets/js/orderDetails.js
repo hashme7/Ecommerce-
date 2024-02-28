@@ -57,3 +57,47 @@ const downloadInvoice = async (orderId) => {
         console.log(error)
     }
 }
+
+const returnProduct = async(productId,orderId)=>{
+    try{
+        console.log(orderId,"dfjkajskdfjkla")
+            Swal.fire({
+                title: "Return Product",
+                html: '<input id="swal-input1" class="swal2-input" placeholder="Enter reason for return">',
+                showCancelButton: true,
+                confirmButtonText: "Submit Request",
+                preConfirm: async () => {
+                  const reason = document.getElementById('swal-input1').value;
+                  try {
+                    const returnUrl = `/returnproduct/${orderId}/${productId}`;
+                    const response = await fetch(returnUrl, {
+                      method: 'PATCH',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({ reason })
+                    });
+              
+                    if (!response.ok) {
+                      return Swal.showValidationMessage(`${JSON.stringify(await response.json())}`);
+                    }
+                    return response.json();
+                  } catch (error) {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                  }
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire({
+                    title: 'Return Request Submitted',
+                    text: 'Your return request has been submitted successfully.',
+                    icon: 'success'
+                  });
+                 location.reload(true)
+                }
+              });       
+    }catch(error){
+        console.log("eror on return order",error)
+    }
+}

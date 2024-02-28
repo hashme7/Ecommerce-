@@ -6,7 +6,6 @@ const { onlinePayment, verifyOnlinePayment } = require('../../services/onlinePay
 const puppeteer = require('puppeteer');
 const fs = require('fs')
 const ejs = require('ejs')
-
 const loadCheckOut = async (req, res) => {
     try {
         let totalAmount = 0;
@@ -38,9 +37,9 @@ const placeOrder = async (req, res) => {
     try {
         const userId = req.session.user_id;
         let totalAmount = 0;
-        const { couponId, address, payment ,shippingMethods} = req.body;
-        console.log("Delivery Charge;::::::",shippingMethods)
-        let deliveryCharge = shippingMethods=='express'?300:100;
+        const { couponId, address, payment, shippingMethods } = req.body;
+        console.log("Delivery Charge;::::::", shippingMethods)
+        let deliveryCharge = shippingMethods == 'express' ? 300 : 100;
         let couponAmount = couponId ? await coupons.findOne({ couponCode: couponId }, { maximumDiscountAmount: 1, quantity: 1 }) : null;
         let userData = await User.findOne({ _id: userId }).populate('cart.product').exec();
         const cartProducts = userData?.cart;
@@ -66,11 +65,11 @@ const placeOrder = async (req, res) => {
             totalAmount: totalAmount,
             status: 'Pending',
             paymentStatus: payment,
-            deliveryMethod:deliveryCharge==300?'express-delivery':'normal-delivery',
+            deliveryMethod: deliveryCharge == 300 ? 'express-delivery' : 'normal-delivery',
         });
-        let couponUsed = coupons.findOne({couponCode:couponId},{_id:1});
-        console.log("couponId",couponUsed)
-        couponAmount ? order.couponUsed =  couponUsed._id: null;
+        let couponUsed = coupons.findOne({ couponCode: couponId }, { _id: 1 });
+        console.log("couponId", couponUsed)
+        couponAmount ? order.couponUsed = couponUsed._id : null;
         if (payment == "COD") {
             if (totalAmount > 1000) {
                 return res.json({ status: 'failed', message: '!COD' })
@@ -145,7 +144,7 @@ const succesOrder = async (req, res) => {
                 await products.updateOne({ _id: productId }, { $inc: { quantity: quantityInOrder } });
             }
         }
-        await Orders.deleteMany({status:"Pending"}).populate('products.product')
+        await Orders.deleteMany({ status: "Pending" }).populate('products.product')
         const userName = req.session.user_name;
         res.render('success', {
             userName
@@ -227,7 +226,7 @@ const downloadInvoice = async (req, res) => {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         const ejsTemplate = fs.readFileSync('views/user/receipt.ejs', 'utf-8');
-        console.log("orderDetails::::::",orderDetail)
+        console.log("orderDetails::::::", orderDetail)
         const htmlContent = ejs.render(ejsTemplate, { orderDetail });
         await page.setContent(htmlContent);
         await page.pdf({ path: `public/invoices/invoice${req.params.orderId}.pdf`, format: 'A4' });
@@ -254,6 +253,36 @@ const downloadInvoice = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+const returnProduct = async (req, res) => {
+    try {
+        const { orderId, productId } = req.params;
+        const reason = req.body.reason;
+        console.log("************************************::::::::::::", orderId, "fjkalsdjfkasdjkfIIII,",)
+        const order = await Orders.findOneAndUpdate(
+            {
+                _id: orderId,
+                'products.product': productId,
+                'products.status': { $nin: ['Return Requested', 'Returned'] }
+            },
+            {
+                $set: {
+                    'products.$.status': 'Return Requested',
+                    'products.$.reason': reason,
+                }
+            },
+            { new: true }
+        );
+
+        if (!order) {
+            return res.status(404).json({ update: false, message: 'Product not eligible for return' });
+        }
+        res.json({ update: true });
+    } catch (error) {
+        console.error("Error in return order Controller", error);
+        res.status(500).json({ update: false, message: 'Internal Server Error' });
+    }
+};
+
 
 
 module.exports = {
@@ -263,5 +292,6 @@ module.exports = {
     orderDetails,
     cancellOrder,
     verifyPayment,
-    downloadInvoice
+    downloadInvoice,
+    returnProduct,
 }

@@ -67,7 +67,7 @@ addBannerForm.addEventListener('submit', async (e) => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                console.log(responseData);
+                window.href('/admin/banners');
             } else {
                 console.error('Error:', response.status);
             }

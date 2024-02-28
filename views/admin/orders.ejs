@@ -170,7 +170,6 @@
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Total</th>
-                                            <th scope="col">Status</th>
                                             <th scope="col">Date</th>
                                             <th scope="col" class="text-end">Action</th>
                                         </tr>
@@ -200,35 +199,31 @@
                                                         <td><span class="badge rounded-pill bg-dark">
                                                                 <%=orders[i].status%>
                                                             </span></td>
-                                                        <%}else{%>
-                                                            <td><span class="badge rounded-pill bg-danger ">
-                                                                    <%=orders[i].status%>
-                                                                </span></td>
-                                                            <%}%>
-                                                                <td>
-                                                                    <%= new Intl.DateTimeFormat('en-GB', {
-                                                                        year: 'numeric' , month: 'long' , day: '2-digit'
-                                                                        }).format(orders[i].orderedDate) %>
-                                                                </td>
-                                                                <td class="text-end">
-                                                                    <a href="/admin/orderDetails/<%= orders[i]._id%>"
-                                                                        class="btn btn-md rounded font-sm">Detail</a>
-                                                                    <div class="dropdown">
-                                                                        <a href="#" data-bs-toggle="dropdown"
-                                                                            class="btn btn-light rounded btn-sm font-sm">
-                                                                            <i class="material-icons md-more_horiz"></i>
-                                                                        </a>
-                                                                        <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#">View
-                                                                                detail</a>
-                                                                            <a class="dropdown-item" href="#">Edit
-                                                                                info</a>
-                                                                            <a class="dropdown-item text-danger"
-                                                                                href="#">Delete</a>
-                                                                        </div>
+                                                        <%}%>
+                                                            <td>
+                                                                <%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' ,
+                                                                    month: 'long' , day: '2-digit'
+                                                                    }).format(orders[i].orderedDate) %>
+                                                            </td>
+                                                            <td class="text-end">
+                                                                <a href="/admin/orderDetails/<%= orders[i]._id%>"
+                                                                    class="btn btn-md rounded font-sm">Detail</a>
+                                                                <div class="dropdown">
+                                                                    <a href="#" data-bs-toggle="dropdown"
+                                                                        class="btn btn-light rounded btn-sm font-sm">
+                                                                        <i class="material-icons md-more_horiz"></i>
+                                                                    </a>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="#">View
+                                                                            detail</a>
+                                                                        <a class="dropdown-item" href="#">Edit
+                                                                            info</a>
+                                                                        <a class="dropdown-item text-danger"
+                                                                            href="#">Delete</a>
                                                                     </div>
-                                                                    <!-- dropdown //end -->
-                                                                </td>
+                                                                </div>
+                                                                <!-- dropdown //end -->
+                                                            </td>
                                             </tr>
                                             <%}%>
                                     </tbody>

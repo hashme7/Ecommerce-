@@ -77,30 +77,55 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                            <th class="text-end">Action</th> <!-- Add a column for the button -->
+                                        </tr>
+                                    </thead>
                                     <tbody>
-                                        <% order.products.forEach(function(product,index) { %>
-                                            <tr>
-                                                <td>
-                                                    <img src="/multerimages/<%= product.product.images[0] %>" alt=""
-                                                        class="img-thumbnail" style="max-width: 80px;">
-                                                </td>
-                                                <td>
-                                                    <a href="/product?_id=<%= product.product._id %>">
-                                                        <%= product.product.productName %>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <%= product.product.category.name %>
-                                                </td>
-                                                <td>
-                                                    <%= product.quantity %>
-                                                </td>
-                                                <td> ₹<%= product.product.price %>
-                                                </td>
-                                                <td> ₹<%= product.quantity*product.product.price %>
-                                                </td>
-                                            </tr>
-                                            <% }); %>
+                                            <% order.products.forEach(function(product, index) { %>
+                                                <tr>
+                                                    <td>
+                                                        <img src="/multerimages/<%= product.product.images[0] %>" alt=""
+                                                            class="img-thumbnail" style="max-width: 80px;">
+                                                    </td>
+                                                    <td>
+                                                        <a href="/product?_id=<%= product.product._id %>">
+                                                            <%= product.product.productName %>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <%= product.quantity %>
+                                                    </td>
+                                                    <td> ₹<%= product.product.price %>
+                                                    </td>
+                                                    <td> ₹<%= product.quantity * product.product.price %>
+                                                    </td>
+                                                    <td>
+
+                                                        <% if (product.status==='Delivered' ) { %>
+                                                            <button type="button" class="btn btn-dark btn-sm"
+                                                                onclick=" returnProduct('<%= product.product._id %>','<%= order._id %>')">Return</button>
+                                                            <% }else if(product.status=='Placed' ){%>
+                                                                <button type="button" class="btn btn-dark btn-sm"
+                                                                    onclick="">Cancell</button>
+                                                                <%}else if(product.status=='Return Requested' ){%>
+                                                                    <div id="actionDiv">
+                                                                        <p>Product Returned</p>
+                                                                    </div>
+                                                                    <%}else if(product.status ==='Return Rejected'){%>
+                                                                        <div>
+                                                                            <p>Return Request is rejected</p>
+                                                                        </div>
+                                                                        <%}%>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
                                     </tbody>
                                 </table>
                             </div>
@@ -108,22 +133,8 @@
                     </div>
                 </div>
             </div>
-
-            <% if(order.status !=='cancel' && order.status !=='Delivered' ) { %>
-                <button type="button" class="btn btn-danger btn-block" onclick="cancelOrder('<%= order._id %>')">Cancel
-                    Order</button>
-                <% }else if(order.status=='Delivered' ){%>
-                    <button type="button" class="btn btn-danger btn-block"
-                        onclick="returnOrder('<%= order._id %>')">Return</button>
-                    <% }else if(order.status=='Return Requested' ){ %>
-                        <p>order return Requested</p>
-                        <% }else if(order.status=='Returned' ){ %>
-                            <p>order Returned</p>
-                            <%}else if(order.status=='Cancelled' ){%>
-                                <p>order Cancelled</p>
-                                <%}%>
-                                    <div style="width: 100%; height: 77px; background-color: white;"></div>
-        </div><!-- End .container -->
+            <div style="width: 100%; height: 77px; background-color: white;"></div>
+        </div>
     </main><!-- End .main -->
 
     <script src="userAssets/js/orderDetails.js"></script>
