@@ -298,10 +298,10 @@
                     const id = document.getElementById('id').value;
                     const formData = new FormData(editBannerForm);
                     const response = await fetch(`/admin/editBanner/${id}`, {
-                        method: 'POST',
+                        method: 'PATCH',
                         body: formData,
                     });
-
+                    console.log(response)
                     if (response.ok) {
                         Swal.fire('Success!', 'Banner updated successfully', 'success');
                     } else {

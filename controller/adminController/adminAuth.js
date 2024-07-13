@@ -37,7 +37,6 @@ const dashBoard = async (req, res) => {
 const dashBoardData = async (req, res) => {
   try {
     const orderList = await orders.find().populate('products.product').exec();
-    console.log(orderList.products)
     const result = await orders.aggregate([
       {
         $match: {
@@ -90,8 +89,6 @@ const dashBoardData = async (req, res) => {
     const bestSellingProducts = await orders.aggregate(bestSellingProductsPipeline);
     const bestSellingCategory = await orders.aggregate(bestSellingCategoryPipeline)
 
-    console.log(bestSellingProducts, "djfk;lasjdkfja")
-    console.log(bestSellingCategory)
     const monthlySales = Array.from({ length: 12 }, (_, i) => ({
       month: i + 1,
       total: 0,

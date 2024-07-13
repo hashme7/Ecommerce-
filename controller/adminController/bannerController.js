@@ -19,7 +19,7 @@ const editBanner = async (req, res) => {
     try {
         const { name, targetType, targetId, startDate, endDate, description } = req.body;
         const { id } = req.params;
-        console.log("dsfasdfasdf", req.file)
+        console.log("dsfasdfasdf--------------------------------------", req.file)
 
         const existedC = await banners.find({ _id: { $ne: id, name: name } });
 
@@ -33,11 +33,13 @@ const editBanner = async (req, res) => {
             userData.description =  description,
             userData.bannerImage =  req.file.filename
            await updateData.save();
+           console.log("succesfully done")
            res.json({ success: true });
         }else{
             res.json({success:false})
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 }

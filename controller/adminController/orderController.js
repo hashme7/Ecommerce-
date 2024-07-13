@@ -8,10 +8,13 @@ const loadOrder = async (req, res) => {
         const orders = await Orders.find({})
             .sort({ orderedDate: -1 })
             .populate('user')
-            .populate('products.product')
-        res.render('orders', { orders })
+            .populate('products.product');
+
+        res.render('orders', { orders });
+
     } catch (error) {
-        console.log("error on loadOrder", error)
+        console.error("Error on loadOrder:", error);
+        res.status(500).send('Internal Server Error'); // Send a generic error response
     }
 }
 

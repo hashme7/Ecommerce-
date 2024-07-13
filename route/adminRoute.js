@@ -56,7 +56,7 @@ adminRoute.get('/addBanners',adminMiddleware.isLogIn,bannerController.loadAddBan
 adminRoute.post('/addBanners',adminMiddleware.isLogIn,bannerMiddleware.uploadsBanner,bannerController.addBanners)
 adminRoute.patch('/updateBanner/:id',adminMiddleware.isLogIn,bannerController.updateBanner)
 adminRoute.get('/editBanner/:id',adminMiddleware.isLogIn,bannerController.loadEditBanner)
-adminRoute.patch('/editBanner/:id',adminMiddleware.isLogIn,bannerMiddleware.uploadsBanner,bannerController.editBanner)
+adminRoute.patch('/editBanner/:id',bannerMiddleware.uploadsBanner,bannerController.editBanner)
 adminRoute.patch('/returnRequestAccept',adminMiddleware.isLogIn,orderController.acceptRequest)
 adminRoute.patch('/returnRequestReject',adminMiddleware.isLogIn,orderController.rejectRequest)
 module.exports = adminRoute;
