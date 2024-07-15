@@ -3,7 +3,7 @@ const util = require('../../utilities/sendEmail')
 const OTP = require('../../model/OTPModel')
 const products = require('../../model/products.Model')
 const banners = require('../../model/BannerModel')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const Categories = require('../../model/categoriesModel')
 
 ///*************home******** */
