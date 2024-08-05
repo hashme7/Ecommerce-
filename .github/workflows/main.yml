@@ -30,7 +30,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: hashme7/eccomerce:latest
-          
+  
   deploy:
     name: Deploy to Kubernetes
     runs-on: ubuntu-latest
