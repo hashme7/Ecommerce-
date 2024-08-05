@@ -1,6 +1,4 @@
 name: Deploy docker Images
-
-
 on:
   push:
     branches:
