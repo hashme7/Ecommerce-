@@ -1,0 +1,47 @@
+name: Deploy docker Images
+
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_push:
+    name: Push Docker images to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Extract  metadata for Ecomerce
+        id: Ecom
+        uses: docker/metadata-action@v2
+        with:
+          images: hashme7/eccomerce
+      - name: Build and Push Ecomerce Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          dockerfile: ./Dockerfile
+          push: true
+          tags: hashme7/eccomerce:latest
+          
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    needs: build_and_push
+    steps:
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.20.0'
+      - name: Deploy to Kubernetes
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        run: |
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
