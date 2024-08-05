@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - main
+      
 jobs:
   build_and_push:
     name: Push Docker images to Docker Hub
