@@ -1,5 +1,5 @@
 const User = require('../../model/userModel');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const Order = require('../../model/OrderModel')
 const {ObjectId} = require('mongodb')
 

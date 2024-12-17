@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 const OTPModel = require('../model/OTPModel')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 let transporter = nodemailer.createTransport({
   service:'gmail' ,
