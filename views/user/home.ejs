@@ -1,7 +1,7 @@
 <%-include('../layouts/header')-%>
 
 	<!-- Banner - slider -->
-	<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+	<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="margin-top: 20px;">
 		<div class="carousel-inner">
 			<% listBanner.forEach((banner, index)=> { %>
 				<div class="carousel-item <%= index === 0 ? 'active' : '' %>" data-bs-interval="10000">
