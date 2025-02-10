@@ -66,8 +66,9 @@ addBannerForm.addEventListener('submit', async (e) => {
             });
 
             if (response.ok) {
+                console.log("afksdf;asdkfj")
                 const responseData = await response.json();
-                window.href('/admin/banners');
+                window.location.href = "/admin/banners";
             } else {
                 console.error('Error:', response.status);
             }
@@ -81,9 +82,10 @@ function validateName(name) {
     return regex.test(name);
 }
 function validateDescription(description) {
-    var regex = /^[a-zA-Z ]{2,60}$/;
-    return regex.test(description)
+  var regex = /^[a-zA-Z .,]{2,60}$/;
+  return regex.test(description);
 }
+
 function validateDate(date) {
     return !isNaN(new Date(date));
 }
