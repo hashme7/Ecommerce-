@@ -16,8 +16,8 @@ userRoute.get('/aboutUs',userAuthController.loadAbout)
 userRoute.get('/contactUS',userAuthController.loadContact)
 userRoute.get("/signup", auth.isLogOut, userAuthController.signup);
 userRoute.post("/signup", userAuthController.verifySignup)
-userRoute.get("/otpsignup", auth.isLogOut, userAuthController.otp)
-userRoute.post('/otpsignup', userAuthController.verifyOTP)
+userRoute.get("/otp", auth.isLogOut, userAuthController.otp)
+userRoute.post('/otp', userAuthController.verifyOTP)
 userRoute.get('/login', auth.isLogOut, userAuthController.login)
 userRoute.post('/login', userAuthController.verifyLogin)
                 // ---------------------\\

@@ -5,7 +5,7 @@ OTPForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   let dat = $(OTPForm).serialize();
   try {
-    let isCorrect = await fetch(`/otpsignup?${dat}`, {
+    let isCorrect = await fetch(`/otp?${dat}`, {
       method: 'POST'
     });
     let result = await isCorrect.json();

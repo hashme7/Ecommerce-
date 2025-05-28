@@ -137,7 +137,7 @@ const verifySignup = async (req, res) => {
             `It seems you logging at CoZA store and trying to verify your Email.
                 Here is the verification code.Please enter otp and verify Email`
         );
-        res.redirect('/otpsignup');
+        res.redirect('/otp');
     } catch (error) {
         console.log("error mailserndein")
         console.log(error)

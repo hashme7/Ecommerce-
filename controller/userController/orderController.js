@@ -3,7 +3,7 @@ const products = require('../../model/products.Model');
 const Orders = require('../../model/OrderModel')
 const coupons = require('../../model/couponModel')
 const { onlinePayment, verifyOnlinePayment } = require('../../services/onlinePayments');
-const puppeteer = require('puppeteer');
+const { chromium } = require("playwright");
 const fs = require('fs')
 const ejs = require('ejs')
 const loadCheckOut = async (req, res) => {
@@ -215,44 +215,52 @@ const cancellOrder = async (req, res) => {
         res.json({ status: 'failed', message: 'An error occurred while cancelling the order' });
     }
 }
+
 const downloadInvoice = async (req, res) => {
-    try {
-        const orderDetail = await Orders.findOne({ _id: req.params.orderId }).populate('products.product').populate('couponUsed');
+  try {
+    const orderDetail = await Orders.findOne({ _id: req.params.orderId })
+      .populate("products.product")
+      .populate("couponUsed");
 
-        if (!orderDetail) {
-            return res.status(404).json({ error: 'Order not found' });
-        }
-
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        const ejsTemplate = fs.readFileSync('views/user/receipt.ejs', 'utf-8');
-        console.log("orderDetails::::::", orderDetail)
-        const htmlContent = ejs.render(ejsTemplate, { orderDetail });
-        await page.setContent(htmlContent);
-        await page.pdf({ path: `public/invoices/invoice${req.params.orderId}.pdf`, format: 'A4' });
-        await browser.close();
-
-        res.download(`public/invoices/invoice${req.params.orderId}.pdf`, (err) => {
-            if (err) {
-                console.error(err);
-            } else {
-                setTimeout(() => {
-                    fs.unlink(`public/invoices/invoice${req.params.orderId}.pdf`, (unlinkErr) => {
-                        if (unlinkErr) {
-                            console.error(unlinkErr);
-                        } else {
-                            console.log('File deleted successfully!');
-                        }
-                    });
-                }, 10000)
-            }
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+    if (!orderDetail) {
+      return res.status(404).json({ error: "Order not found" });
     }
-}
+
+    const browser = await chromium.launch();
+    const page = await browser.newPage();
+    const ejsTemplate = fs.readFileSync("views/user/receipt.ejs", "utf-8");
+
+    console.log("orderDetails::::::", orderDetail);
+
+    const htmlContent = ejs.render(ejsTemplate, { orderDetail });
+    await page.setContent(htmlContent, { waitUntil: "load" });
+
+    const pdfPath = `public/invoices/invoice${req.params.orderId}.pdf`;
+
+    await page.pdf({ path: pdfPath, format: "A4" });
+
+    await browser.close();
+
+    res.download(pdfPath, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        setTimeout(() => {
+          fs.unlink(pdfPath, (unlinkErr) => {
+            if (unlinkErr) {
+              console.error(unlinkErr);
+            } else {
+              console.log("File deleted successfully!");
+            }
+          });
+        }, 10000);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 const returnProduct = async (req, res) => {
     try {
         const { orderId, productId } = req.params;
