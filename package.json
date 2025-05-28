@@ -7,7 +7,8 @@
     "node": "22.x"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +35,6 @@
     "sharp": "^0.33.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.1.10"
   }
 }

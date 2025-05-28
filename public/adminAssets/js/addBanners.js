@@ -60,9 +60,9 @@ addBannerForm.addEventListener('submit', async (e) => {
     if (valid) {
         const data = new FormData(addBannerForm);
         try {
-            const response = await fetch('/admin/addBanners', {
-                method: 'POST',
-                body: data,
+            const response = await fetch("/admin/banners", {
+              method: "POST",
+              body: data,
             });
 
             if (response.ok) {

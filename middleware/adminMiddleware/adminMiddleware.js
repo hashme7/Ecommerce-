@@ -4,7 +4,7 @@ const isLogIn = (req,res,next) => {
         if (req.session.admin_id) {
             next();
         } else {
-            res.redirect('/admin/adminLogin');
+            res.redirect('/admin/login');
         }
     } catch (error) {
         console.log(error.message);
@@ -15,7 +15,7 @@ const isLogOut = (req,res,next)=>{
         if(req.session.admin_id == null){
             next()
         }else{
-            res.redirect('/admin/adminDashboard')
+            res.redirect('/admin/dashboard')
         }
     }catch(error){
         console.log("error on islogout",error)

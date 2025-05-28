@@ -58,7 +58,7 @@
         <nav>
             <ul class="menu-aside">
                 <li class="menu-item active">
-                    <a class="menu-link" href="/admin/adminDashboard">
+                    <a class="menu-link" href="/admin/dashboard">
                         <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
@@ -194,6 +194,7 @@
                                     <td class="text-end">
                                         <% if (userlist[i].isBlocked) {%>
                                             <button class="badge rounded-pill badge-success" id="actionBtn"
+                                            style="background-color: #87e484;"
                                                 onclick="blockAndUnblock('<%= userlist[i].email %>','<%= userlist[i].isBlocked %>')">
                                                 unBlock
                                             </button>

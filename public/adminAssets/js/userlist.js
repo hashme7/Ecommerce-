@@ -16,7 +16,7 @@ let blockAndUnblock = async (email, BlockedOrNot) => {
                 e.preventDefault();
             } else {
                 console.log("unblock")
-                let respon = await fetch(`http://localhost:2020/admin/blockUser?email=${email}`, {
+                let respon = await fetch(`http://localhost:3000/admin/blockUser?email=${email}`, {
                     method: "PATCH"
                 });
                 if (respon.ok) {
@@ -47,7 +47,7 @@ let blockAndUnblock = async (email, BlockedOrNot) => {
                 e.preventDefault();
             }else{
                 console.log("unblock")
-                let respon= await fetch(`http://localhost:2020/admin/unBlockUser?email=${email}`, {
+                let respon= await fetch(`http://localhost:3000/admin/unBlockUser?email=${email}`, {
                     method: "PATCH"
                 });
                 if (respon.ok) {

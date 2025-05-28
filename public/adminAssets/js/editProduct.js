@@ -117,24 +117,24 @@ editForm.addEventListener('submit', async (e) => {
         formData.append(`cropedImages`, blob, `cropped_image_${index}${Math.random()}.png`);
     });
 
-    fetch('/admin/editProduct', {
-        method: 'PATCH',
-        body: formData,
+    fetch("/admin/Products", {
+      method: "PATCH",
+      body: formData,
     })
-        .then(response => {
-            if (response.ok) {
-                swal.fire({
-                    text: 'product updated successfully',
-                    icon: 'success',
-                });
-                setTimeout(() => {
-                    window.location.href = '/admin/Products'
-                })
-            } else {
-                throw new Error(`Failed with status: ${response.status}`);
-            }
-        })
-        .catch((error) => {
-            console.error('Fetch error:', error);
-        });
+      .then((response) => {
+        if (response.ok) {
+          swal.fire({
+            text: "product updated successfully",
+            icon: "success",
+          });
+          setTimeout(() => {
+            window.location.href = "/admin/Products";
+          });
+        } else {
+          throw new Error(`Failed with status: ${response.status}`);
+        }
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+      });
 });

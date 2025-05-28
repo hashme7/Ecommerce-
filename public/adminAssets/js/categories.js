@@ -77,7 +77,7 @@ formModal = async (catId) => {
     try {
         if (catId) {
             console.log("formModal")
-            let response = await fetch(`http://localhost:2020/admin/findCatId?_id=${catId}`, {
+            let response = await fetch(`http://localhost:3000/admin/findCatId?_id=${catId}`, {
                 method: "GET"
             })
             if (response.ok) {
@@ -169,9 +169,12 @@ editFormsub = async () => {
         if (!valData) {
             return false
         } else {
-            let response = await fetch(`/admin/editCategory?findCatId=${catIdForEdit}&&discription=${discIN}&&name=${CatNameIN}`, {
-                method: "PATCH"
-            })
+            let response = await fetch(
+              `/admin/categories?findCatId=${catIdForEdit}&&discription=${discIN}&&name=${CatNameIN}`,
+              {
+                method: "PATCH",
+              }
+            );
             let res = await response.json();
             console.log(res.message)
             if (res.message.modifiedCount > 0) {
@@ -197,17 +200,16 @@ addCategory = async (event) => {
             event.preventDefault();
             return false;
         } else {
-            let res = await fetch('/admin/addCategories', {
-                method: "POST"
-                ,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: document.getElementById('AddCatName').value,
-                    discription: document.getElementById('Adddiscription').value
-                })
-            })
+            let res = await fetch("/admin/categories", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: document.getElementById("AddCatName").value,
+                discription: document.getElementById("Adddiscription").value,
+              }),
+            });
             event.preventDefault();
             let result = await res.json();
             if (result.ok) {

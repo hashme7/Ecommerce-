@@ -17,7 +17,7 @@ const adminLoginVerify = (req, res) => {
     const { email, password } = req.body;
     if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASS) {
       req.session.admin_id = "admin1";
-      res.redirect('/admin/adminDashboard')
+      res.redirect('/admin/dashboard')
     } else {
       res.render('adminLogin', { message: "incorrect Password" })
     }
@@ -127,7 +127,7 @@ const dashBoardData = async (req, res) => {
 const adminLogout = async (req, res) => {
   try {
     req.session.admin_id = null
-    res.redirect('/admin/adminLogin')
+    res.redirect('/admin/login')
   } catch (error) {
     console.log(error, " in logout admin")
   }
